@@ -9,8 +9,6 @@
   </div>
 </template>
 
-
-
 <style lang="less" scoped>
 .searchInfo {
   width: 100%;
@@ -103,7 +101,7 @@
 </style>
 
 <script>
-import { cahrtGraphForSearch } from "../utils/charts/cahrtGraphForSearch";
+import { cahrtGraphForSearch } from "@/utils/charts/cahrtGraphForSearch";
 export default {
   data() {
     return {};
