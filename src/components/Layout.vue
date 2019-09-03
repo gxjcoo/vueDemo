@@ -38,7 +38,7 @@
         padding: 0
     }
     .ivu-card-body{
-        padding: 0 !important;
+        background: #F2F3F5;
     }
 </style>
 <template>

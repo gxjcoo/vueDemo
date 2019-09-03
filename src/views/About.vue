@@ -19,49 +19,13 @@
       </el-col>
       <el-col :span="10" class="right">
         <el-row class="info">
-          <p>174.168.120.143</p>
-          <ul>
-            <li>
-              开放端口： 0
-              <span></span>
-            </li>
-            <li>
-              反查域名： 0
-              <span></span>
-            </li>
-            <li>
-              地理位置： 中国 杭州
-              <span></span>
-            </li>
-            <li>
-              累计被攻击次数： 121
-              <span></span>
-            </li>
-          </ul>
-          <ul>
-            <li>
-              首次被攻击时间： 2019-10-20 20:20:30
-              <span></span>
-            </li>
-            <li>
-              最近被攻击时间： 2019-10-20 20:20:30
-              <span></span>
-            </li>
-            <li>
-              被攻击最频繁手段：攻击方式1
-              <span></span>
-            </li>
-            <li>
-              最近被攻击手段：攻击方式1
-              <span></span>
-            </li>
-          </ul>
+        
         </el-row>
         <el-row class="detail">
           <div class="button_group">
-            <button>威胁情报聚合</button>
-            <button>IP反查</button>
-            <button>开发端口</button>
+            <button>XXXX</button>
+            <button>XXXX</button>
+            <button>XXXX</button>
           </div>
           <div class="content_detail">
             <div class="intelligence" v-for="(item,index) in info" :key="index">
@@ -157,7 +121,6 @@
           margin-top: 1.25rem;
           height: 21.417rem;
           .intelligence {
-      
             height: 6.667rem;
             .title {
               font-size: 16px;
@@ -166,27 +129,26 @@
               color: rgba(51, 51, 51, 1);
             }
             .substance {
-
-              margin:1.292rem 1rem;
+              margin: 1.292rem 1rem;
               overflow: hidden;
-               ul:nth-child(1){
+              ul:nth-child(1) {
                 float: left;
               }
-              ul:nth-child(2){
+              ul:nth-child(2) {
                 float: right;
-                li:nth-child(1){
-                  font-weight:400;
-color:rgba(153,153,153,1);
+                li:nth-child(1) {
+                  font-weight: 400;
+                  color: rgba(153, 153, 153, 1);
                 }
-                li:nth-child(2){
+                li:nth-child(2) {
                   margin-left: 1rem;
-                
-height:1.333rem;
-background:rgba(179,179,179,0.1);
-border:1px solid rgba(179,179,179,1);
-opacity:0.8;
-border-radius:.667rem;
-margin-top: .875rem
+
+                  height: 1.333rem;
+                  background: rgba(179, 179, 179, 0.1);
+                  border: 1px solid rgba(179, 179, 179, 1);
+                  opacity: 0.8;
+                  border-radius: 0.667rem;
+                  margin-top: 0.875rem;
                 }
               }
             }
@@ -199,230 +161,17 @@ margin-top: .875rem
 </style>
 
 <script>
-import echarts from "echarts";
-import { parse } from "path";
+import { cahrtGraphForSearch } from "../utils/charts/cahrtGraphForSearch";
 export default {
   data() {
-    return {
-      input: "",
-      info:["微步情报","开源情报","相关事件"]
-    };
+    return {};
   },
   methods: {
-    aa(el) {
-      //加载图片
-      let a = require("@/assets/1.png");
-      let b = require("@/assets/2.png");
-      let c = require("@/assets/3.png");
-      this.chart = echarts.init(document.getElementById(el));
-
-      var size = 30; //节点大小
-      var listdata = []; //节点数组
-      var links = []; //链接数组
-      var texts = []; //链接数组
-
-      //节点信息
-      var file_json = [
-        { name: "文件", type: 1 },
-        { name: "文件2", type: 1 },
-        { name: "文件3", type: 1 },
-        { name: "文件4", type: 1 },
-        { name: "文件6", type: 1 },
-        { name: "文件7", type: 1 },
-        { name: "文件8", type: 1 },
-        { name: "文件9", type: 1 }
-      ];
-
-      var url_json = [
-        { name: "链接1", type: 2 },
-        { name: "链接2", type: 2 },
-        { name: "链接3", type: 2 },
-        { name: "链接4", type: 2 },
-        { name: "链接5", type: 2 },
-        { name: "链接6", type: 2 },
-        { name: "链接7", type: 2 },
-        { name: "链接8", type: 2 }
-      ];
-      var network_json = [
-        { name: "网络1", type: 3 },
-        { name: "网络2", type: 3 },
-        { name: "网络3", type: 3 },
-        { name: "网络4", type: 3 },
-        { name: "网络5", type: 3 },
-        { name: "网络6", type: 3 },
-        { name: "网络7", type: 3 },
-        { name: "网络8", type: 3 }
-      ];
-      //检索目标
-      var target_json = [
-        {
-          name: "IP",
-          type: 0
-        }
-      ];
-
-      //设置节点大小，位子
-      function setData(json) {
-        let img = {
-          3: a,
-          1: b,
-          2: c,
-          0: a
-        };
-        var i = 0;
-        json.forEach(function(p) {
-          if (p["type"] == 0) {
-            let name = img[p["type"]];
-            listdata.push({
-              x: i * 200,
-              y: i * 100,
-              name: p["name"],
-              symbolSize: 80,
-              symbol: "image://" + name,
-              draggable: "true",
-              formatter: function(params) {
-                return params.data.showName;
-              }
-            });
-            i++;
-          } else {
-            let name = img[p["type"]];
-            listdata.push({
-              x: i * 35,
-              y: size + i * 8,
-              name: p["name"],
-              symbolSize: size,
-              symbol: "image://" + name,
-              draggable: "true",
-              formatter: function(params) {
-                return params.data.showName;
-              }
-            });
-            i++;
-            if (i == 10) {
-              i = 0;
-            }
-          }
-        });
-      }
-
-      function setLinkData(json, isTraget) {
-        if (isTraget !== "") {
-          var i = 0;
-          json.forEach(function(p) {
-            links.push({
-              source: target_json[0]["name"],
-              target: p.name,
-              value: "",
-              lineStyle: {
-                normal: {
-                  // text: relarr[i],
-                  color: "#C3CED9"
-                }
-              }
-            });
-            i++;
-          });
-        } else {
-          json.forEach(function(p) {
-            links.push({
-              source: p.name,
-              target: target_json[0]["name"],
-              value: "",
-              lineStyle: {
-                normal: {
-                  color: "#C3CED9"
-                }
-              }
-            });
-          });
-        }
-      }
-      let result = [];
-      result.push(...target_json, ...file_json, ...url_json, ...network_json);
-      setData(result);
-
-      //文件
-      setLinkData(file_json, "");
-      //链接
-      setLinkData(url_json, "");
-      //网络
-      setLinkData(network_json, "");
-
-      var option = {
-        tooltip: {
-          formatter: "{b}"
-        },
-
-        toolbox: {
-          show: true,
-          feature: {
-            magicType: {
-              show: true,
-              type: ["force", "chord"]
-            },
-            saveAsImage: {
-              show: true
-            }
-          }
-        },
-        backgroundColor: "#fff",
-        series: [
-          {
-            type: "graph",
-            layout: "force",
-            force: {
-              repulsion:100,//斥力
-              gravity: 0.02,//引力
-              //edgeLength:20,
-              edgeLength: parseInt(
-                Math.random() * 20 +
-                  Math.random() * 30 +
-                  Math.random() * 40 +
-                  Math.random() * 10+Math.random() * 10+Math.random()
-              ),
-              layoutAnimation: true//是否动画
-            },
-            //箭头
-            // edgeSymbol: ['none', 'arrow'],
-            // edgeSymbolSize: 12,
-            data: listdata,
-            links: links,
-            nodeScaleRatio: 1, //鼠标漫游缩放时节点的相应缩放比例，当设为0时节点不随着鼠标的缩放而缩放
-            focusNodeAdjacency: true, //是否在鼠标移到节点上的时候突出显示节点以及节点的边和邻接节点。
-            lineStyle: {
-              normal: {
-                opacity: 0.5,
-                width: 1.5,
-                curveness: 0
-              }
-            },
-            label: {
-              normal: {
-                show: true,
-                position: "inside",
-                textStyle: {
-                  //标签的字体样式
-                  color: "#000000", //字体颜色
-                  fontWeight: "normal", //'normal'标准'bold'粗的'bolder'更粗的'lighter'更细的或100 | 200 | 300 | 400...
-                  fontSize: "12" //字体大小
-                },
-                formatter: function(params) {
-                  return params.data.showName; //此处为label转换 并转换颜色
-                },
-                fontSize: 18,
-                fontStyle: "600"
-              }
-            }
-          }
-        ]
-      };
-      this.chart.setOption(option, true);
-    }
+    cahrtGraphForSearch
   },
   mounted() {
     this.$nextTick(function() {
-      this.aa("charts");
+      this.cahrtGraphForSearch(this, "charts");
     });
   }
 };

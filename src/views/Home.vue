@@ -1,73 +1,77 @@
 <template>
-  <div class="searchInfo">
-    <el-row class="box">
-      <el-col :span="14" class="left">
-        <div id="charts" style=" width:100%;height:100%;"></div>
+  <div class="reportSubscriptionManage">
+    <el-row class="header_title">
+      <el-col :span="12">
+        <Title title="报表订阅" titleEn="Task Report"></Title>
       </el-col>
-      <el-col :span="10" class="right">
-        <el-row class="info">
-        4123123
-        </el-row>
-        <el-row class="detail">
-       123
-        </el-row>
+      <el-col :span="12" align="right">
+        <el-button icon="el-icon-plus">添加报表</el-button>
       </el-col>
     </el-row>
+    <el-card class="box-card">
+      <el-table :data="tableData" stripe>
+        <el-table-column label="报表名称" prop="name"></el-table-column>
+        <el-table-column label="报表模板名称" prop="name"></el-table-column>
+        <el-table-column label="生成周期" prop="name"></el-table-column>
+        <el-table-column label="操作">
+          <template slot-scope="scope">
+            <el-button type="text" icon="el-icon-document"></el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div class="pagination">
+        <Pagination></Pagination>
+      </div>
+    </el-card>
   </div>
 </template>
 
-
-
-<style lang="less">
-.searchInfo {
-  width: 100%;
-  height: 88vh;
-  background: #fff;
-  border-radius: 10px;
-  
-  .box {
-    border-top: 1px solid rgba(245, 245, 245, 1);
-    height: 79vh;
-    .left {
-      height: 79vh;
-      border-right: 1px solid rgba(245, 245, 245, 1);
-    }
-    .right {
-      height: 79vh;
-      overflow: auto;
-      .info {
-        height: 12.5rem;
-        padding: 0.792rem;
-        border-bottom: 1px solid rgba(245, 245, 245, 1);
-      }
-      .detail {
-        height: 29.125rem;
-        background: #000;
-        padding: 0.792rem;
-      }
-    }
-  }
-}
-</style>
-
 <script>
-import {cahrtGraphForSearch} from "../utils/charts/cahrtGraphForSearch";
-import { parse } from "path";
+import Title from "@/components/common/Title";
+import Pagination from "@/components/common/Pagination";
 export default {
+  components: {
+    Title,
+    Pagination
+  },
   data() {
     return {
-      input: "",
-      info:["微步情报","开源情报","相关事件"]
+      tableData: [
+        { name: "张三" },
+        { name: "张三1" },
+        { name: "张三2" },
+        { name: "张三3" },
+        { name: "张三4" }
+      ]
     };
-  },
-  methods: {
-    cahrtGraphForSearch
-   
-  },
-  mounted() {
-    this.$nextTick(function() {
-      this.cahrtGraphForSearch(this,"charts");
-    });
   }
 };
 </script>
+
+<style>
+.reportSubscriptionManage .header_title {
+  justify-content: space-between;
+}
+.reportSubscriptionManage .header_title .el-button,
+.reportSubscriptionManage .submitBtn {
+  background: linear-gradient(
+    90deg,
+    rgba(55, 111, 222, 1) 0%,
+    rgba(3, 157, 255, 1) 100%
+  );
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}
+.reportSubscriptionManage .box-card {
+  height: 32rem;
+  position: relative;
+}
+.reportSubscriptionManage .pagination {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0 0.3rem;
+}
+</style>
