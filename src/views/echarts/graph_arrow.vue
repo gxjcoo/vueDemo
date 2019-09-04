@@ -91,7 +91,7 @@ export default {
           draggable: "true"
         },
         {
-          name: "市政项目",
+                    name: "市政项目",
           symbolSize: 32,
           draggable: "true"
         },
@@ -119,6 +119,10 @@ export default {
         toolbox: {
           show: true,
           feature: {
+            dataView: {
+              show: true,
+              readOnly: true
+            },
             restore: {
               show: true
             },
