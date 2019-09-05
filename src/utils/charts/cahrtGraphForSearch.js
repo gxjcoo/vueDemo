@@ -1,7 +1,7 @@
 import echarts from 'echarts'
 const cahrtGraphForSearch = (that, el) => {
     that.chart = echarts.init(document.getElementById(el));
-    console.log(that.chart)
+  
         //加载图片
         let a = require("@/assets/1.png");
         let b = require("@/assets/2.png");
@@ -52,7 +52,7 @@ const cahrtGraphForSearch = (that, el) => {
         ];
   
         //设置节点大小，位子
-        function setData(json) {
+        function setData(arr) {
           let img = {
             3: a,
             1: b,
@@ -60,7 +60,7 @@ const cahrtGraphForSearch = (that, el) => {
             0: a
           };
           var i = 0;
-          json.forEach(function(p) {
+          arr.forEach(function(p) {
             if (p["type"] == 0) {
               let name = img[p["type"]];
               listdata.push({
@@ -96,10 +96,10 @@ const cahrtGraphForSearch = (that, el) => {
           });
         }
   
-        function setLinkData(json, isTraget) {
+        function setLinkData(arr, isTraget) {
           if (isTraget !== "") {
             var i = 0;
-            json.forEach(function(p) {
+            arr.forEach(function(p) {
               links.push({
                 source: target_json[0]["name"],
                 target: p.name,
@@ -114,7 +114,7 @@ const cahrtGraphForSearch = (that, el) => {
               i++;
             });
           } else {
-            json.forEach(function(p) {
+            arr.forEach(function(p) {
               links.push({
                 source: p.name,
                 target: target_json[0]["name"],
