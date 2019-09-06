@@ -76,53 +76,171 @@ export default {
   methods: {
     aa(el) {
       this.chart = echarts.init(document.getElementById(el));
-      let a = require("@/assets/1.png");
-      let data = [
-        {
-          name: "招标倾向性",
-          symbolSize: 100,
-          draggable: false,
-          
-        },
-        {
- 
-          name: "房建项目",
-          symbolSize: 40,
-          draggable: "true"
-        },
-        {
-                    name: "市政项目",
-          symbolSize: 32,
-          draggable: "true"
-        },
-        {
-          name: "装饰装修项目",
-          symbolSize: 40,
-          draggable: "true"
-        },
-        {
-          name: "园林绿化项目",
-          symbolSize: 40,
-          draggable: "true"
+        let a = require("@/assets/1.png");
+        let b = require("@/assets/2.png");
+        let c = require("@/assets/3.png");
+      let nodesData=[];
+      let linksData=[];
+         //设置节点大小，位子
+        function setNodes(arr){
+          let img = {
+            3: a,
+            1: b,
+            2: c,
+            0: a
+          };
+          arr.forEach(function(p) {
+              let name = img[p["type"]];
+              if(p["source"]){
+                nodesData.push({
+                name: p["name"],
+                  x: 0,
+                y: 0,
+                symbolSize:64,
+                symbol: "image://" + name,
+                draggable: "true",
+                formatter: function(params) {
+                  return params.data.showName;
+                }
+              });
+              }else{
+                  nodesData.push({
+                name: p["name"],
+                symbolSize:48,
+                symbol: "image://" + name,
+                draggable: "true",
+                formatter: function(params) {
+                  return params.data.showName;
+                }
+              });
+              }
+            
+          });
         }
-      ];
-      let links = [
-        {
-          source: "房建项目",
-          target: "园林绿化项目"
+         function setLinks(arr){
+          arr.forEach(function(p) {
+            if(p["target"] instanceof Array){            
+ p["target"].forEach(function(i){
+    console.log( p["name"])
+                linksData.push({
+               source: p["name"],
+               target: i
+              });
+            })
+            }
+          });
         }
-       
+                function setInitLinks(arr){
+          arr.forEach(function(p) {
+            if(p["target"] instanceof Array){            
+ p["target"].forEach(function(i){
+    console.log( p["name"])
+                linksData.push({
+               source: p["name"],
+               target: i,
+                            lineStyle: {
+              normal: {
+                color: '#25CCB4',
+                curveness: 0,
+                type: "solid"
+              }}
+              });
+            })
+            }
+          });
+        }
+          function setVictimLinks(arr){
+          arr.forEach(function(p) {
+            if(p["target"] instanceof Array){            
+ p["target"].forEach(function(i){
+    console.log( p["name"])
+                linksData.push({
+               source: p["name"],
+               target: i,
+                           lineStyle: {
+              normal: {
+                color: "#F24040",
+                curveness: 0,
+                type: "solid"
+              }}
+              });
+            })
+            }
+          });
+        }
+      let data1 = [
+        {
+          source:true,
+          name: "1",
+          type:1,
+          target:["2","3","4","11","12","13"],
+        },
+           {
+          name: "4",
+        type:2,
+          target:["6"],
+        },
+      
+        {
+          name: "6",
+          type:1,
+        }
+
       ];
+        let data2 = [
+            {
+          name: "5",
+          type:3,
+          target:["13"],
+        },
+        {
+          name: "2",
+          type:1,
+          target:["1"],
+        },
+        {
+          name: "3",
+         type:2,
+        }
+        ,{
+          name: "7",
+          type:1,
+          target:["3"],
+        },{
+          name: "8",
+          type:1,
+          target:["1"],
+        },{
+          name: "9",
+          type:1,
+          target:["4"],
+        },
+     {
+          name: "11",
+        type:2,
+
+        },{
+          name: "12",
+        type:2,
+
+        },{
+          name: "13",
+        type:2,
+
+        },
+      ];
+setNodes(data1);
+setNodes(data2);
+setInitLinks(data1)
+setVictimLinks(data2)
       var option = {
-    
+      tooltip: {
+            formatter: "{b}"
+          },
         //工具箱
         toolbox: {
           show: true,
           feature: {
-            dataView: {
-              show: true,
-              readOnly: true
-            },
             restore: {
               show: true
             },
@@ -140,28 +258,34 @@ export default {
             layout: "force",
             force: {
               repulsion: 600, //斥力
-              //gravity: 0.02,//引力s
-              edgeLength: 130 //线长
+             // gravity: 0.02,//引力s
+              edgeLength: 140 //线长
             },
             //箭头
             edgeSymbol: ["none", "arrow"],
             edgeSymbolSize: 12,
-            data: data,
-            links: links,
-            focusNodeAdjacency: true,
+            data: nodesData,
+            links: linksData,
+            nodeScaleRatio: 1, //鼠标漫游缩放时节点的相应缩放比例，当设为0时节点不随着鼠标的缩放而缩放
+              focusNodeAdjacency: true, //是否在鼠标移到节点上的时候突出显示节点以及节点的边和邻接节点。
             roam: true,
-            label: {
-              normal: {
-                show: true,
-                position: "bottom"
-              }
-            },
-            lineStyle: {
-              normal: {
-                color: "source",
-                curveness: 0,
-                type: "solid"
-              }
+             label: {
+                normal: {
+                  show: true,
+                  position: "inside",
+                  textStyle: {
+                    //标签的字体样式
+                    color: "#000000", //字体颜色
+                    fontWeight: "normal", //'normal'标准'bold'粗的'bolder'更粗的'lighter'更细的或100 | 200 | 300 | 400...
+                    fontSize: "12" //字体大小
+                  },
+                  formatter: function(params) {
+                    return params.data.showName; //此处为label转换 并转换颜色
+                  },
+                  fontSize: 18,
+                  fontStyle: "600"
+                
+              },
             },
           }
         ]
