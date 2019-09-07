@@ -1,5 +1,4 @@
 import echarts from "ecahrts"
-import { linkSync } from "fs";
 const graph = (that,el,lineData,color)=>{
     that.chart = echarts.init(document.getElementById(el));
     var dataArr=[{

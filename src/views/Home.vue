@@ -15,7 +15,7 @@
     </el-row>
     <el-row class="box">
       <el-col :span="14" class="left">
-        <div id="charts" style=" width:100%;height:100%;"></div>
+        <div id="charts" style=" width:40%;height:100%;"></div>
       </el-col>
       <el-col :span="10" class="right">
         <el-row class="info">2</el-row>
@@ -66,7 +66,6 @@
 
 <script>
 import echarts from "echarts";
-import { parse } from "path";
 export default {
   data() {
     return {
@@ -74,228 +73,108 @@ export default {
     };
   },
   methods: {
-    aa(el) {
-      this.chart = echarts.init(document.getElementById(el));
-        let a = require("@/assets/1.png");
-        let b = require("@/assets/2.png");
-        let c = require("@/assets/3.png");
-      let nodesData=[];
-      let linksData=[];
-         //设置节点大小，位子
-        function setNodes(arr){
-          let img = {
-            3: a,
-            1: b,
-            2: c,
-            0: a
-          };
-          arr.forEach(function(p) {
-              let name = img[p["type"]];
-              if(p["source"]){
-                nodesData.push({
-                name: p["name"],
-                  x: 0,
-                y: 0,
-                symbolSize:64,
-                symbol: "image://" + name,
-                draggable: "true",
-                formatter: function(params) {
-                  return params.data.showName;
-                }
-              });
-              }else{
-                  nodesData.push({
-                name: p["name"],
-                symbolSize:48,
-                symbol: "image://" + name,
-                draggable: "true",
-                formatter: function(params) {
-                  return params.data.showName;
-                }
-              });
-              }
-            
-          });
+    aa(el,lineData,color){
+    this.chart = echarts.init(document.getElementById(el));
+    var dataArr=[{
+        name:'0',
+        value:[-100,170]
+    },{
+        name:'1',
+        value:[-100,85]
+    },{
+        name:'2',
+        value:[-100,0]
+    },{
+        name:'3',
+        value:[-100,-75]
+    },{
+        name:'4',
+        value:[-100,-160]
+    },{
+        name:'5',
+        value:[100,170]
+    },{
+        name:'6',
+        value:[100,85]
+    },{
+        name:'7',
+        value:[100,0]
+    },{
+        name:'8',
+        value:[100,-75]
+    },{
+        name:'9',
+        value:[100,-160]
+    },
+]
+//点的大小
+var symbolSize = 0.01;
+var links = lineData.map(function(item){
+    return {
+        source:item[0],
+        target:item[1],
+        lineStyle:{
+            //判断是否有弧度
+            curveness:item[1]-item[0]==5?0 :item[1]-item[1]<5?0.2:-0.2
         }
-         function setLinks(arr){
-          arr.forEach(function(p) {
-            if(p["target"] instanceof Array){            
- p["target"].forEach(function(i){
-    console.log( p["name"])
-                linksData.push({
-               source: p["name"],
-               target: i
-              });
-            })
-            }
-          });
-        }
-                function setInitLinks(arr){
-          arr.forEach(function(p) {
-            if(p["target"] instanceof Array){            
- p["target"].forEach(function(i){
-    console.log( p["name"])
-                linksData.push({
-               source: p["name"],
-               target: i,
-                            lineStyle: {
-              normal: {
-                color: '#25CCB4',
-                curveness: 0,
-                type: "solid"
-              }}
-              });
-            })
-            }
-          });
-        }
-          function setVictimLinks(arr){
-          arr.forEach(function(p) {
-            if(p["target"] instanceof Array){            
- p["target"].forEach(function(i){
-    console.log( p["name"])
-                linksData.push({
-               source: p["name"],
-               target: i,
-                           lineStyle: {
-              normal: {
-                color: "#F24040",
-                curveness: 0,
-                type: "solid"
-              }}
-              });
-            })
-            }
-          });
-        }
-      let data1 = [
-        {
-          source:true,
-          name: "1",
-          type:1,
-          target:["2","3","4","11","12","13"],
-        },
-           {
-          name: "4",
-        type:2,
-          target:["6"],
-        },
-      
-        {
-          name: "6",
-          type:1,
-        }
-
-      ];
-        let data2 = [
-            {
-          name: "5",
-          type:3,
-          target:["13"],
-        },
-        {
-          name: "2",
-          type:1,
-          target:["1"],
-        },
-        {
-          name: "3",
-         type:2,
-        }
-        ,{
-          name: "7",
-          type:1,
-          target:["3"],
-        },{
-          name: "8",
-          type:1,
-          target:["1"],
-        },{
-          name: "9",
-          type:1,
-          target:["4"],
-        },
-     {
-          name: "11",
-        type:2,
-
-        },{
-          name: "12",
-        type:2,
-
-        },{
-          name: "13",
-        type:2,
-
-        },
-      ];
-setNodes(data1);
-setNodes(data2);
-setInitLinks(data1)
-setVictimLinks(data2)
-      var option = {
-      tooltip: {
-            formatter: "{b}"
-          },
-        //工具箱
-        toolbox: {
-          show: true,
-          feature: {
-            restore: {
-              show: true
-            },
-            saveAsImage: {
-              show: true
-            }
-          }
-        },
-
-        animationDuration: 1000, //初始动画市场（没感觉的出来）
-        animationEasingUpdate: "quinticInOut", //动画方式（也没感觉）
-        series: [
-          {
-            type: "graph",
-            layout: "force",
-            force: {
-              repulsion: 600, //斥力
-             // gravity: 0.02,//引力s
-              edgeLength: 140 //线长
-            },
-            //箭头
-            edgeSymbol: ["none", "arrow"],
-            edgeSymbolSize: 12,
-            data: nodesData,
-            links: linksData,
-            nodeScaleRatio: 1, //鼠标漫游缩放时节点的相应缩放比例，当设为0时节点不随着鼠标的缩放而缩放
-              focusNodeAdjacency: true, //是否在鼠标移到节点上的时候突出显示节点以及节点的边和邻接节点。
-            roam: true,
-             label: {
-                normal: {
-                  show: true,
-                  position: "inside",
-                  textStyle: {
-                    //标签的字体样式
-                    color: "#000000", //字体颜色
-                    fontWeight: "normal", //'normal'标准'bold'粗的'bolder'更粗的'lighter'更细的或100 | 200 | 300 | 400...
-                    fontSize: "12" //字体大小
-                  },
-                  formatter: function(params) {
-                    return params.data.showName; //此处为label转换 并转换颜色
-                  },
-                  fontSize: 18,
-                  fontStyle: "600"
-                
-              },
-            },
-          }
-        ]
-      };
-      this.chart.setOption(option, true);
     }
+})
+
+var option= {
+    grid:{
+        top:0,
+        left:10,
+        bottom:0,
+        right:0
+    },
+    xAxis:{
+        min:-105,
+        max:105,
+        type:'value',
+        axisLine:{
+            onZero:false
+        },
+        show:false
+    },
+    yAxis:{
+        min:-200,
+        max:200,
+        type:'value',
+        axisLine:{
+            onZero:false
+        },
+        show:false
+    },
+    series:[{
+        type:'graph',
+        layout:'none',
+        coordinateSystem:'cartesian2d',
+        symbolSize:symbolSize,
+        edgeSymbol:['circle','arrow'],
+        edgeSymbolSize:[4,10],
+        data:echarts.util.map(dataArr,function(item,di){
+            return item.value
+        }),
+        edges:links,
+        lineStyle:{
+            normal:{
+                width:2,
+                color,
+                opacity:1
+            }
+        },
+        itemStyle:{
+            opacity:0
+        }
+    }]
+}
+this.chart.setOption(option,true)
+
+}
   },
   mounted() {
     this.$nextTick(function() {
-      this.aa("charts");
+      this.aa("charts",[[0,5],[0,6],[1,5],[2,7],[2,9],[3,9],[4,8]],'red');
     });
   }
 };
