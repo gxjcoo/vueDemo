@@ -15,7 +15,8 @@
     </el-row>
     <el-row class="box">
       <el-col :span="14" class="left">
-        <div id="charts" style=" width:40%;height:100%;"></div>
+        <div id="charts1" style=" width:40%;height:100%;"></div>
+        <div id="charts2" style=" width:20%;height:100%;"></div>
       </el-col>
       <el-col :span="10" class="right">
         <el-row class="info">2</el-row>
@@ -29,6 +30,13 @@
 
 
 <style lang="less" scoped>
+#charts2{
+  margin-left:20rem;
+  position: absolute;
+  top:0rem;
+  z-index:999
+
+}
 .searchInfo {
   width: 100%;
   height: 92vh;
@@ -174,7 +182,8 @@ this.chart.setOption(option,true)
   },
   mounted() {
     this.$nextTick(function() {
-      this.aa("charts",[[0,5],[0,6],[1,5],[2,7],[2,9],[3,9],[4,8]],'red');
+     this.aa("charts1",[[0,5],[1,6],[2,7],[3,8],[4,9]],'red');
+      this.aa("charts2",[[0,5],[1,6],[2,7],[3,8],[4,9]],'red');
     });
   }
 };
