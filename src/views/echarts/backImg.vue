@@ -80,11 +80,7 @@ export default {
         let b = require("@/assets/2.png");
         let c = require("@/assets/3.png");
     
-      var option = {
-
-
-
-
+      var option = {  
         graphic: [
             {
                 type: 'image',
