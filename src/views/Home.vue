@@ -60,6 +60,9 @@
       height: 79vh;
       overflow: auto;
       background: #000;
+      &::-webkit-scrollbar {
+    display: none;
+}
       .info {
         height: 11.541666666666666rem;
         border-bottom: 1px solid rgba(245, 245, 245, 1);
