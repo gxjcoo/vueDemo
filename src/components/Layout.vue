@@ -31,6 +31,22 @@
             <MenuGroup title="留存">
               <MenuItem name="3-4">用户留存</MenuItem>
               <MenuItem name="3-5">流失用户</MenuItem>
+              <MenuItem name="3-5">流失用户</MenuItem>
+              <MenuItem name="3-5">流失用户</MenuItem>
+              <MenuItem name="3-5">流失用户</MenuItem>
+              <MenuItem name="3-5">流失用户</MenuItem>
+              <MenuItem name="3-5">流失用户</MenuItem>
+              <MenuItem name="3-5">流失用户</MenuItem>
+              <MenuItem name="3-5">流失用户</MenuItem>
+              <MenuItem name="3-5">流失用户</MenuItem>
+              <MenuItem name="3-5">流失用户</MenuItem>
+              <MenuItem name="3-5">流失用户</MenuItem>
+              <MenuItem name="3-5">流失用户</MenuItem>
+              <MenuItem name="3-5">流失用户</MenuItem>
+              <MenuItem name="3-5">流失用户</MenuItem>
+              <MenuItem name="3-5">流失用户</MenuItem>
+              <MenuItem name="3-5">流失用户</MenuItem>
+              <MenuItem name="3-5">流失用户</MenuItem>
             </MenuGroup>
           </Submenu>
         </Menu>

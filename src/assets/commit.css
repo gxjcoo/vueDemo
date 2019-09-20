@@ -1,3 +1,5 @@
 body{
-    color:#333
+    color:#000
 }
+body::-webkit-scrollbar {
+    display: none}
