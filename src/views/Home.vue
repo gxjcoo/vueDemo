@@ -1,193 +1,205 @@
 <template>
-  <div class="searchInfo">
-    <!-- input框 -->
-    <el-row class="search">
-      <el-col :span="10">
-        <el-input v-model="input" placeholder="请输入IP、域名、文件名（MD5/SHA1）"></el-input>
-      </el-col>
-      <el-col :span="4">
-        <button>搜索</button>
-      </el-col>
-    </el-row>
-    <!-- 示例 -->
-    <el-row class="example">
-      <el-col :span="24">搜索样例</el-col>
-    </el-row>
-    <el-row class="box">
-      <el-col :span="14" class="left">
-        <div id="charts1" style=" width:40%;height:100%;"></div>
-        <div id="charts2" style=" width:20%;height:100%;"></div>
-      </el-col>
-      <el-col :span="10" class="right">
-        <el-row class="info">2</el-row>
-        <el-row class="detail">1</el-row>
-      </el-col>
-      <el-col></el-col>
-    </el-row>
+  <div>
+      <el-row class="bigImgBox">
+        <el-col :span="10" :offset="7">
+          <el-card shadow="hover" class="bigImg">
+            <img src="../assets/bigScreen/1.jpg" />
+            <p>综合监控
+              <span> 
+               <i class="el-icon-s-tools" @click="dialogVisible = true"></i>            
+              </span>
+            </p>
+          </el-card>
+          </el-col>
+      </el-row>
+      <el-row class="smallImgBox"  type="flex" :gutter="40">
+            <el-col  style=" height:100%;">
+              <el-card shadow="hover" class="smallImg">
+                <img src="../assets/bigScreen/2.jpg" />
+                <p>漏洞监控
+                   <span> 
+               <i class="el-icon-s-tools" @click="dialogVisible = true"></i>
+              </span>
+                </p>
+              </el-card>
+            </el-col>
+            <el-col  style="height:100%;">
+               <el-card shadow="hover" class="smallImg">
+                <img src="../assets/bigScreen/3.png" />
+                <p>威胁监控
+                   <span> 
+               <i class="el-icon-s-tools" @click="dialogVisible = true"></i>
+              </span>
+                </p>
+              </el-card>
+            </el-col>
+               <el-col style="height:100%;"> 
+                 <el-card shadow="hover" class="smallImg">
+                <img src="../assets/bigScreen/4.png" />
+                <p>资产监控
+                   <span> 
+               <i class="el-icon-s-tools" @click="dialogVisible = true"></i>
+              </span>
+                </p>
+              </el-card></el-col>
+      </el-row>
+
+
+<el-dialog
+  title="更改设置"
+  :visible.sync="dialogVisible"
+   v-if="dialogVisible"
+  width="30%"
+  :before-close="handleClose">
+  
+
+  <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+  <el-form-item label="名称：" prop="name">
+    <el-input v-model="ruleForm.name"></el-input>
+  </el-form-item>
+ 
+  <el-form-item label="周期：" prop="resource">
+    <el-radio-group v-model="ruleForm.resource">
+      <el-radio label="定时"></el-radio>
+      <el-radio label="近7天"></el-radio>
+      <el-radio label="近30天"></el-radio>
+    </el-radio-group>
+  </el-form-item>
+  <el-form-item>
+    <!-- <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button> -->
+    <!-- <el-button @click="resetForm('ruleForm')">重置</el-button> -->
+  </el-form-item>
+</el-form>
+  <span slot="footer" class="dialog-footer">
+    <el-button @click="resetForm('ruleForm')">取 消</el-button>
+    <el-button type="primary" @click="submitForm('ruleForm')">确 定</el-button>
+  </span>
+</el-dialog>
   </div>
 </template>
 
 
+<script>
+  export default {
+    data() {
+      return {
+        dialogVisible: false,
+        ruleForm: {
+          name: '',
+          resource: '',
+
+        },
+        rules: {
+          name: [
+            { required: true, message: '请输入活动名称', trigger: 'blur' },
+            { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+          ],
+          resource: [
+            { required: true, message: '请选择活动资源', trigger: 'change' }
+          ]
+        }
+      };
+    },
+    methods: {
+      //点击空白处关闭modal框
+      handleClose(done) {
+        this.$confirm('确认关闭？')
+          .then(_ => {
+           done()
+          })
+          .catch(_ => {});
+      },
+      //提交按钮事件
+       submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            //发送ajax数据
+
+
+
+            //重置数据
+            this.$refs[formName].resetFields();
+            this.dialogVisible = false
+
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+       
+      },
+      // 重置
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
+        this.dialogVisible = false
+      }
+    }
+  };
+</script>
 
 <style lang="less" scoped>
-#charts2{
-  margin-left:20rem;
-  position: absolute;
-  top:0rem;
-  z-index:999
-
-}
-.searchInfo {
-  width: 100%;
-  height: 92vh;
-  background: #fff;
-  border-radius: 10px;
-  padding-top: 0.8334rem;
-  .search {
-    margin-left: 0.8334rem;
-  }
-  .example {
-    margin: 0.8334rem 0 0.7rem 0.8334rem;
-  }
-  .box {
-    border-top: 1px solid rgba(245, 245, 245, 1);
-    height: 79vh;
-    .left {
-      height: 79vh;
-      border-right: 1px solid rgba(245, 245, 245, 1);
+  //大的Img
+.bigImgBox {
+  margin-bottom:1rem;
+  .bigImg {
+    position: relative;
+    //top: 1rem;
+    transition: all 0.5s ease 0s;
+    &:hover {
+      //top: 0.5rem;
+      box-shadow: 0 14px 18px 0 rgba(0, 0, 0, 0.3) !important;
     }
-    .right {
-      height: 79vh;
-      overflow: auto;
-      background: #000;
-      &::-webkit-scrollbar {
-    display: none;
-}
-      .info {
-        height: 11.541666666666666rem;
-        border-bottom: 1px solid rgba(245, 245, 245, 1);
-      }
-      .detail {
-        height: 25.25rem;
+    img {
+      width: 100%;
+    }
+    p {
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-align: center;
+      top: 0.4rem;
+       span{
+        display: inline-block;
+        position: absolute;
+        right:1rem;
+        &:hover{
+          color:Skyblue;
+           cursor: pointer;
+        }
       }
     }
   }
 }
+ //小的Img
+  .smallImgBox{
+   
+  .smallImg {
+     position: relative;
+    top: 0.5rem;
+    width:100%;
+    height:70%;
+    transition: all 0.5s ease 0s;
+    &:hover {
+      //top: 1rem;
+      box-shadow: 0 7px 9px 0 rgba(0, 0, 0, 0.3) !important;
+    }
+    img {
+      width: 100%;
+    }
+    p {
+      font-size: 1rem;
+      font-weight: bold;
+      text-align: center;
+      top: 0.4rem;
+       span{
+        display: inline-block;
+        position: absolute;
+        right:1rem;
+        &:hover{
+          color:Skyblue;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  }
 </style>
-
-<script>
-import echarts from "echarts";
-export default {
-  data() {
-    return {
-      input: ""
-    };
-  },
-  methods: {
-    aa(el,lineData,color){
-    this.chart = echarts.init(document.getElementById(el));
-    var dataArr=[{
-        name:'0',
-        value:[-100,170]
-    },{
-        name:'1',
-        value:[-100,85]
-    },{
-        name:'2',
-        value:[-100,0]
-    },{
-        name:'3',
-        value:[-100,-75]
-    },{
-        name:'4',
-        value:[-100,-160]
-    },{
-        name:'5',
-        value:[100,170]
-    },{
-        name:'6',
-        value:[100,85]
-    },{
-        name:'7',
-        value:[100,0]
-    },{
-        name:'8',
-        value:[100,-75]
-    },{
-        name:'9',
-        value:[100,-160]
-    },
-]
-//点的大小
-var symbolSize = 0.01;
-var links = lineData.map(function(item){
-    return {
-        source:item[0],
-        target:item[1],
-        lineStyle:{
-            //判断是否有弧度
-            curveness:item[1]-item[0]==5?0 :item[1]-item[1]<5?0.2:-0.2
-        }
-    }
-})
-
-var option= {
-    grid:{
-        top:0,
-        left:10,
-        bottom:0,
-        right:0
-    },
-    xAxis:{
-        min:-105,
-        max:105,
-        type:'value',
-        axisLine:{
-            onZero:false
-        },
-        show:false
-    },
-    yAxis:{
-        min:-200,
-        max:200,
-        type:'value',
-        axisLine:{
-            onZero:false
-        },
-        show:false
-    },
-    series:[{
-        type:'graph',
-        layout:'none',
-        coordinateSystem:'cartesian2d',
-        symbolSize:symbolSize,
-        edgeSymbol:['circle','arrow'],
-        edgeSymbolSize:[4,10],
-        data:echarts.util.map(dataArr,function(item,di){
-            return item.value
-        }),
-        edges:links,
-        lineStyle:{
-            normal:{
-                width:2,
-                color,
-                opacity:1
-            }
-        },
-        itemStyle:{
-            opacity:0
-        }
-    }]
-}
-this.chart.setOption(option,true)
-
-}
-  },
-  mounted() {
-    this.$nextTick(function() {
-     this.aa("charts1",[[0,5],[1,6],[2,7],[3,8],[4,9]],'red');
-      this.aa("charts2",[[0,5],[1,6],[2,7],[3,8],[4,9]],'red');
-    });
-  }
-};
-</script>

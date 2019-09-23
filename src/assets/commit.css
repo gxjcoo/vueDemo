@@ -1,5 +1,6 @@
 body{
-    color:#000
+    color:#000;
+    padding-right:0 !important
 }
 body::-webkit-scrollbar {
     display: none}
