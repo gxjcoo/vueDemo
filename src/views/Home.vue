@@ -35,7 +35,7 @@
             </el-col>
                <el-col style="height:100%;"> 
                  <el-card shadow="hover" class="smallImg">
-                <img src="../assets/bigScreen/4.png" />
+                <img src="../assets/bigScreen/add.png" />
                 <p>资产监控
                    <span> 
                <i class="el-icon-s-tools" @click="dialogVisible = true"></i>

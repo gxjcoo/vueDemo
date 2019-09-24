@@ -1,11 +1,17 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+import LoadImg from './components/loadImg.vue'
 const About = () => import(/* webpackChunkName: "about" */ './views/About.vue')
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    {
+      path: '/loading',
+      name: 'loadImg',
+      component: LoadImg
+    },
     {
       path: '/',
       name: 'home',
