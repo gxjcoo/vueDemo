@@ -13,7 +13,9 @@
       </el-row>
     </div>
     <div :class="{'right':true,'show':show,'hidden':hidden}">
-      <Graph></Graph>
+      <div class="top5">
+        <div id="chartsBar" style=" width:100%;height:100%;"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -42,8 +44,14 @@ position: relative;
   margin-bottom: 3rem;
 }
 .left {
+   position: absolute;
+    width:20%;
+    height:100%;
+   left:3rem;
+   top:3rem;
+
   overflow: hidden;
-  width:20%;
+
   .el-row {
     width: 10rem;
     .icon {
@@ -77,11 +85,13 @@ position: relative;
 
 .right{
     position: absolute;
-    background: #fff;
     width:20%;
     height:100%;
    right:3rem;
    top:3rem;
+   .top5{
+     height:10rem;
+   }
     }
 @keyframes hidden {
   0% {
@@ -105,12 +115,11 @@ position: relative;
 }
 </style>
 <script>
-import Graph from "./echarts//graph_arrow"
+import {beatBar } from "../utils/charts/chartsBar"
 export default {
-    components:{Graph},
     data() {
         return {
-            show:true,
+            show:false,
             hidden:false,
             device:[
                 {name:'主机设备'},
@@ -120,5 +129,17 @@ export default {
             ]
         }
     },
+    methods: {
+    beatBar
+  },
+    mounted(){
+      this.$nextTick(function() {
+      this.beatBar(this, "chartsBar");
+    })
+    //  setInterval(()=>{
+    //     this.show=!this.show,
+    //   this.hidden = !this.hidden
+    //  },3000)
+    }
 };
 </script>
