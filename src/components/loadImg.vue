@@ -15,7 +15,7 @@
 export default {
   data () {
     return {
-      count: 0,
+      count: 1,
       total:0,
       percent: '',
       img:[]
@@ -27,7 +27,8 @@ export default {
   methods: {
     preload: function() {
       let imgs = [
-        "public/img/add.png",
+
+        "http://127.0.0.1:8080/img/add.png",
        
       ]
       this.total=imgs.length;
