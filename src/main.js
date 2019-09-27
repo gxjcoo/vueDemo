@@ -5,8 +5,11 @@ import router from './router'
 import store from './store'
 import './plugins/element.js'
 import './plugins/iview.js'
+import './plugins/dplayer'
+
 import './assets/commit.css'
 import myCharts from 'echarts'
+
 Vue.use(myCharts)
 Vue.config.productionTip = false
 
