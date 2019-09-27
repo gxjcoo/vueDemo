@@ -127,7 +127,6 @@ let colorArray = [
 
 
  let option = {
-    backgroundColor: '#000',
     grid: [
         {
         left: '10%',
@@ -156,7 +155,7 @@ let colorArray = [
         axisLabel: {
             textStyle: {
                 color: '#fff',
-                fontSize: '16'
+                fontSize: '12'
             }
         },
         data: IP
@@ -167,7 +166,7 @@ let colorArray = [
         axisLabel: {
             textStyle: {
                 color: '#ffffff',
-                fontSize: '16'
+                fontSize: '12'
             }
         },
         data: [1, 1, 1, 1,1]
@@ -209,7 +208,7 @@ let colorArray = [
                 },
                 textStyle: {
                     color: '#ffffff',
-                    fontSize: '16'
+                    fontSize: '12'
                 }
             }
         },
@@ -287,7 +286,7 @@ let colorArray = [
                },
                 textStyle: {
                     color: '#ffffff',
-                    fontSize: '16'
+                    fontSize: '12'
                 }
             }
         },
@@ -310,7 +309,7 @@ let colorArray = [
                },
                 textStyle: {
                     color: '#ffffff',
-                    fontSize: '16'
+                    fontSize: '12'
                 }
             }
         },
