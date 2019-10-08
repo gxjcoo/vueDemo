@@ -8,21 +8,21 @@
 
 <style lang="less" scoped>
 .box{
-  width:18rem;
-  height:10rem;
+  width:100%;
+  height:100vh;
   background: #000;
 }
 </style>
 
 <script>
-import {linearGradient } from "../utils/charts/chartsLine"
+import {echartsWorld } from "../utils/charts/chartsWorld"
 export default {
   methods: {
-  linearGradient
+  echartsWorld
   },
   mounted() {
     this.$nextTick(function() {
-      this.linearGradient(this,"charts");
+      this.echartsWorld(this,"charts");
     });
   }
 };
