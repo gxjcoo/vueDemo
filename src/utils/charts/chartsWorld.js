@@ -4,11 +4,9 @@ import 'echarts/map/js/world'
 import {nameMap,nameMapArr} from './world'
 const echartsWorld = (that, el) => {
     that.chart = echarts.init(document.getElementById(el))
-
-var worlddata=[
-                {name: 'China', value:1,selected:true},
-                {name: 'Portugal', value:1,selected:true},
-            ];
+//存放蓝色板块数据
+var worlddata=[];
+//存放地区坐标
 var geoCoordMap = {
     中国: [121.4648, 31.2891],
     尼日利亚: [-4.388361, 11.186148],
@@ -36,6 +34,7 @@ var geoCoordMap = {
     墨西哥: [-99.094092, 19.365711],
     加拿大温哥华: [-123.023921, 49.311753]
 };
+//存放连线关系图
 var BJData = [
     [{
         name: "美国洛杉矶",
@@ -64,12 +63,6 @@ var BJData = [
         name: "中国"
     }],
     [{
-        name: "俄罗斯伊尔库茨克",
-        value: 8125
-    }, {
-        name: "中国"
-    }],
-    [{
         name: "巴西",
         value: 3590
     }, {
@@ -79,12 +72,18 @@ var BJData = [
 ];
 var convertData = function(data) {
     //涉及国家
+    //根据连线数据生成蓝色板块数据
 let tempCountry = [];
 tempCountry=data.map(item=>item[0].name)
 tempCountry.push(data[0][1].name)
-tempCountry = tempCountry.filter(item=>nameMap.value == item)
-console.log(nameMap.value)
-console.log(tempCountry)
+tempCountry.forEach(i=>{
+    //根据连线的点得到国家名
+    let temp = nameMapArr.filter(item=>i.indexOf(Object.values(item)[0])!=-1)[0];
+    //生成地图蓝色区域数据
+    let tempArr= {name:Object.keys(temp)[0],value:1,selected:true}
+    worlddata.push(tempArr)
+})
+
 
 
     //涉及国家的连线
@@ -176,7 +175,7 @@ var series = [];
                         color: '#0695F6'
                     }], false),
                     width: 2,
-                    opacity: 0.03,
+                    opacity: 0.05,
                     curveness: 0.1
                 }
             },
@@ -198,9 +197,12 @@ var series = [];
                     show: true,
                     position: "bottom", //显示位置
                     offset: [-5, 5], //偏移设置
-                    formatter: "{b}", //圆环显示文字
+                    //formatter: "{b}",
+
+                    formatter: "", //圆环显示文字
                     textStyle: {
-                        color: "#fff"
+                        color: "#fff",
+                       
                     }
                 },
                 emphasis: {
@@ -237,7 +239,8 @@ var series = [];
                     show: true,
                     position: "right",
                     color: "#00ffff",
-                    formatter: "{b}",
+                    //formatter: "{b}",
+                    formatter: "",
                     textStyle: {
                         color: "#fff"
                     }
