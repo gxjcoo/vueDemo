@@ -2,5 +2,17 @@ body{
     color:#000;
     padding-right:0 !important
 }
-body::-webkit-scrollbar {
-    display: none}
+
+::-webkit-scrollbar {
+    background-color: #5a76cd;
+    width: 6px;
+border-radius:6px
+
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #181c32;
+
+border-radius:6px
+
+}
