@@ -2,6 +2,7 @@
   <div class="box">
     <h2>基于el-table的动态表格</h2>
     <div style="width:30rem;margin:0 auto">
+         
 <el-table :data="tableData" height="250" border style="width: 100%;">
       <el-table-column prop="date" label="日期" width="180"></el-table-column>
       <el-table-column prop="name" label="姓名" width="180"></el-table-column>
@@ -9,18 +10,27 @@
     </el-table>
     </div>
     <div>
-      <h2>使用循环动态生成table</h2>
-      <div class="table">
-        <!-- 表头 -->
-        <p class="heard">
-          <span v-for="item in tableHeader" :key="item">{{item}}</span>
-        </p>
-        <!-- 列表 -->
-        <div class="tbody">
-          <!-- 行 -->
-          <p class="tr"></p>
-        </div>
-      </div>
+      <h2>给予Vue的transition-group生成动态table</h2>
+        <!--对于v-for遍历有一组数据的过渡，不能使用transition包裹后，然后定义动画效果，而是使用transition-group进行包裹-->
+        <!--同时，对于transition-group包裹的元素，必须要有唯一的key属性，同数据库关键字效果-->
+      <p class="theard">
+        <span>name</span>
+        <span>qq</span>
+        <span>happy</span>
+      </p>
+      <ul class="tbody">
+        <transition-group appear tag="ul">
+          <li
+            v-for="(item) in list"
+            :key="item.id"
+          >
+          <span> {{ item.name }}</span>
+          <span>{{ item.qq }}</span>
+          <span>{{ item.happyNum }}</span>
+          </li>
+        </transition-group>
+      
+      </ul>
     </div>
   </div>
 </template>
@@ -29,161 +39,184 @@
 
 
 <script>
-  let tableData=[{
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        },{
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        },{
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        },{
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        },{
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        },{
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        },{
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        },{
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        },{
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }];
-  export default {
-    data() {
-      return {
-        interval:'',
-        tableData: [],
-        tableHeader:["日期","姓名","地址"]
-      }
-    },
-methods:{
-  change() {
+let id = 3
+let tableData = [
+  {
+    date: "2016-05-05",
+    name: "王小虎",
+    address: "上海市普陀区金沙江路 1518 弄"
+  },
+  {
+    date: "2016-05-06",
+    name: "王小虎",
+    address: "上海市普陀区金沙江路 1518 弄"
+  },
+  {
+    date: "2016-05-07",
+    name: "王小虎",
+    address: "上海市普陀区金沙江路 1518 弄"
+  },
+  {
+    date: "2016-05-08",
+    name: "王小虎",
+    address: "上海市普陀区金沙江路 1518 弄"
+  },
+  {
+    date: "2016-05-09",
+    name: "王小虎",
+    address: "上海市普陀区金沙江路 1518 弄"
+  },
+  {
+    date: "2016-05-10",
+    name: "王小虎",
+    address: "上海市普陀区金沙江路 1518 弄"
+  },
+  {
+    date: "2016-05-11",
+    name: "王小虎",
+    address: "上海市普陀区金沙江路 1518 弄"
+  },
+  {
+    date: "2016-05-12",
+    name: "王小虎",
+    address: "上海市普陀区金沙江路 1518 弄"
+  },
+  {
+    date: "2016-05-01",
+    name: "王小虎",
+    address: "上海市普陀区金沙江路 1518 弄"
+  },
+  {
+    date: "2016-05-02",
+    name: "王小虎",
+    address: "上海市普陀区金沙江路 1518 弄"
+  },
+  {
+    date: "2016-05-03",
+    name: "王小虎",
+    address: "上海市普陀区金沙江路 1518 弄"
+  },
+  {
+    date: "2016-05-04",
+    name: "王小虎",
+    address: "上海市普陀区金沙江路 1518 弄"
+  },
+  {
+    date: "2016-05-01",
+    name: "王小虎",
+    address: "上海市普陀区金沙江路 1518 弄"
+  },
+  {
+    date: "2016-05-02",
+    name: "王小虎",
+    address: "上海市普陀区金沙江路 1518 弄"
+  },
+  {
+    date: "2016-05-03",
+    name: "王小虎",
+    address: "上海市普陀区金沙江路 1518 弄"
+  },
+  {
+    date: "2016-05-04",
+    name: "王小虎",
+    address: "上海市普陀区金沙江路 1518 弄"
+  },
+  {
+    date: "2016-05-01",
+    name: "王小虎",
+    address: "上海市普陀区金沙江路 1518 弄"
+  },
+  {
+    date: "2016-05-02",
+    name: "王小虎",
+    address: "上海市普陀区金沙江路 1518 弄"
+  },
+  {
+    date: "2016-05-03",
+    name: "王小虎",
+    address: "上海市普陀区金沙江路 1518 弄"
+  },
+  {
+    date: "2016-05-04",
+    name: "王小虎",
+    address: "上海市普陀区金沙江路 1518 弄"
+  },
+  {
+    date: "2016-05-01",
+    name: "王小虎",
+    address: "上海市普陀区金沙江路 1518 弄"
+  },
+  {
+    date: "2016-05-02",
+    name: "王小虎",
+    address: "上海市普陀区金沙江路 1518 弄"
+  },
+  {
+    date: "2016-05-03",
+    name: "王小虎",
+    address: "上海市普陀区金沙江路 1518 弄"
+  },
+  {
+    date: "2016-05-04",
+    name: "王小虎",
+    address: "上海市普陀区金沙江路 1518 弄"
+  },
+  {
+    date: "2016-05-01",
+    name: "王小虎",
+    address: "上海市普陀区金沙江路 1518 弄"
+  },
+  {
+    date: "2016-05-02",
+    name: "王小虎",
+    address: "上海市普陀区金沙江路 1518 弄"
+  },
+  {
+    date: "2016-05-03",
+    name: "王小虎",
+    address: "上海市普陀区金沙江路 1518 弄"
+  },
+  {
+    date: "2016-05-04",
+    name: "王小虎",
+    address: "上海市普陀区金沙江路 1518 弄"
+  }
+];
+export default {
+  data() {
+    return {
+      interval: "",
+      tableData: [
+        {
+          date: "2016-05-01",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1518 弄"
+        },
+        {
+          date: "2016-05-02",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1518 弄"
+        },
+        {
+          date: "2016-05-03",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1518 弄"
+        },
+        {
+          date: "2016-05-04",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1518 弄"
+        }
+      ],
+
+   
+      //还是注意这里如果这里是查询，不能写null表示空，而是直接使用‘’表示
+      list: [
+      ]
+    };
+  },
+  methods: {
+   change() {
     if(tableData.length>0){
       //change、paly表格数据动态滚动
       this.tableData.unshift(tableData[0]);//把第一条数据插入数组最有一条
@@ -194,36 +227,80 @@ methods:{
         this.interval=null
     }
   },
-  play() {
-  this.interval = setInterval(this.change, 2000);//每两秒执行一次插入删除操作
+    play() {
+      this.interval = setInterval(this.change, 2000); //每两秒执行一次插入删除操作
+      this.interval = setInterval(this.add, 2000); //每两秒执行一次插入删除操作
+    },
+
+    add() {
+      this.list.unshift({ id:id,name: "陈小帅", qq: 3199578835, happyNum: 10  });
+      id++;
+    },
+  },
+  created() {
+    this.play();
+  },
+  destroyed() {
+    window.clearInterval(this.interval);
+    this.interval = null;
   }
-},
-created(){
-  this.play()
-},
-destroyed() {
-  window.clearInterval(this.interval)
-  this.interval=null
-},
-  }
+};
 </script>
 <style lang="less">
-
 .box {
   width: 100%;
   height: 100vh;
+  background: #000;
+  color: #fff;
 }
 
-//自写table
-.table{
-  color:#fff;
-  background: #000;
-.heard{
+//transition-group
+.theard{
+  font-size: 1rem;
+  font-weight: bold;
   span{
-    margin-right:8rem;
+    display: inline-block;
+    width:10rem;
+  }
+}
+.tbody{
+  width:40rem;
+  height: 10rem;
+  overflow: auto;
+  li {
+  line-height: 150%;
+  span{
+      display: inline-block;
+    width:10rem;
   }
 }
 }
+
+
+.v-enter,
+.v-lerve-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+.v-enter-active,
+.v-lerve-active {
+  transition: all 1s ease;
+}
+/*添加进场效果*/
+
+.v-move {
+  transition: all 2s ease;
+}
+.v-leave-active {
+  position: absolute;
+}
+
+
+
+
+
+
+
 //el-table
 .el-table__row:nth-child(1){
   animation: donghua 2s infinite ;
