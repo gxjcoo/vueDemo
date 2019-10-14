@@ -1,327 +1,366 @@
 <template>
-  <div class="box">
-    <h2>基于el-table的动态表格</h2>
-    <div style="width:30rem;margin:0 auto">
-         
-<el-table :data="tableData" height="250" border style="width: 100%;">
-      <el-table-column prop="date" label="日期" width="180"></el-table-column>
-      <el-table-column prop="name" label="姓名" width="180"></el-table-column>
-      <el-table-column prop="address" label="地址"></el-table-column>
-    </el-table>
+  <div class="comprehensive">
+    <div class="top">
+      <div class="title">态势感知平台</div>
+      <div class="title_right">
+        <p>当前风险值：<span style="color:#319FFF">70</span></p>
+        <p>未来一小时风险：<span style="color:#FF3333">上升<i class="  el-icon-top"></i></span></p>      
+      </div>
     </div>
-    <div>
-      <h2>给予Vue的transition-group生成动态table</h2>
-        <!--对于v-for遍历有一组数据的过渡，不能使用transition包裹后，然后定义动画效果，而是使用transition-group进行包裹-->
-        <!--同时，对于transition-group包裹的元素，必须要有唯一的key属性，同数据库关键字效果-->
-      <p class="theard">
-        <span>name</span>
-        <span>qq</span>
-        <span>happy</span>
-      </p>
-      <ul class="tbody">
-        <transition-group appear tag="ul">
-          <li
-            v-for="(item) in list"
-            :key="item.id"
-          >
-          <span> {{ item.name }}</span>
-          <span>{{ item.qq }}</span>
-          <span>{{ item.happyNum }}</span>
-          </li>
-        </transition-group>
-      
-      </ul>
+    <div :class="{'left':true,'show':show,'hidden':hidden}">
+      <el-row>
+        <p>资产概览</p>
+        <p>Asset Overview</p>
+        <div></div>
+      </el-row>
+      <el-row v-for="item in device" :key="item.name">
+        <el-col class="icon" :span="8"></el-col>
+        <el-col :span="16" class="title">
+          <el-row>{{item.name}}</el-row>
+          <el-row>
+            <i class="el-icon-caret-top" style="font-size: "></i>
+            <span>13020</span>
+          </el-row>
+        </el-col>
+      </el-row>
+    </div>
+    <div :class="{'right':true,'show':show,'hidden':hidden}">
+ <div class="risk">
+        <div class="title_risk">
+              <p>风险评分</p>
+        <p>Risk Score</p>
+        <div></div>
+        </div>
+        <div id="chartsRisk" style=" width:100%;height:100%;"></div>
+        <div class="detail">
+           <p>相对于上周上升<span style="color:#319FFF">20%  <i class="  el-icon-top"></i> </span></p>
+           <p>环比下降<span style="color:#FF3333">20% <i class="  el-icon-bottom"></i> </span></p>
+        </div>
+      </div>
+      <div class="top5">
+        <div class="title_top5">
+              <p>攻击Top5</p>
+        <p>Attack Top5</p>
+        <div></div>
+        </div>
+        <div id="chartsBar" style=" width:100%;height:100%;"></div>
+      </div>
+       <div class="hot">
+        <div class="title_hot">
+              <p>热门事件</p>
+        <p>Hot Event</p>
+        <!-- 左侧白色标签 -->
+        <div></div>
+        </div>
+        <!-- //内容 -->
+        <div class="content_hot">
+                  <div class="hot_item" v-for="(item,index) in hot" :key="index">
+          <div class="rank">NO.{{index+1}}</div>
+          <div class="content">杭州市主机设备发现最大漏洞</div>
+        </div>
+        </div>
+
+      </div>
     </div>
   </div>
 </template>
+<style  lang="less" scoped >
+.show{
 
+     animation: show 2s ease-in;
+     opacity: 1;
+}
+.hidden{
 
-
-
-<script>
-let id = 3
-let tableData = [
-  {
-    date: "2016-05-05",
-    name: "王小虎",
-    address: "上海市普陀区金沙江路 1518 弄"
-  },
-  {
-    date: "2016-05-06",
-    name: "王小虎",
-    address: "上海市普陀区金沙江路 1518 弄"
-  },
-  {
-    date: "2016-05-07",
-    name: "王小虎",
-    address: "上海市普陀区金沙江路 1518 弄"
-  },
-  {
-    date: "2016-05-08",
-    name: "王小虎",
-    address: "上海市普陀区金沙江路 1518 弄"
-  },
-  {
-    date: "2016-05-09",
-    name: "王小虎",
-    address: "上海市普陀区金沙江路 1518 弄"
-  },
-  {
-    date: "2016-05-10",
-    name: "王小虎",
-    address: "上海市普陀区金沙江路 1518 弄"
-  },
-  {
-    date: "2016-05-11",
-    name: "王小虎",
-    address: "上海市普陀区金沙江路 1518 弄"
-  },
-  {
-    date: "2016-05-12",
-    name: "王小虎",
-    address: "上海市普陀区金沙江路 1518 弄"
-  },
-  {
-    date: "2016-05-01",
-    name: "王小虎",
-    address: "上海市普陀区金沙江路 1518 弄"
-  },
-  {
-    date: "2016-05-02",
-    name: "王小虎",
-    address: "上海市普陀区金沙江路 1518 弄"
-  },
-  {
-    date: "2016-05-03",
-    name: "王小虎",
-    address: "上海市普陀区金沙江路 1518 弄"
-  },
-  {
-    date: "2016-05-04",
-    name: "王小虎",
-    address: "上海市普陀区金沙江路 1518 弄"
-  },
-  {
-    date: "2016-05-01",
-    name: "王小虎",
-    address: "上海市普陀区金沙江路 1518 弄"
-  },
-  {
-    date: "2016-05-02",
-    name: "王小虎",
-    address: "上海市普陀区金沙江路 1518 弄"
-  },
-  {
-    date: "2016-05-03",
-    name: "王小虎",
-    address: "上海市普陀区金沙江路 1518 弄"
-  },
-  {
-    date: "2016-05-04",
-    name: "王小虎",
-    address: "上海市普陀区金沙江路 1518 弄"
-  },
-  {
-    date: "2016-05-01",
-    name: "王小虎",
-    address: "上海市普陀区金沙江路 1518 弄"
-  },
-  {
-    date: "2016-05-02",
-    name: "王小虎",
-    address: "上海市普陀区金沙江路 1518 弄"
-  },
-  {
-    date: "2016-05-03",
-    name: "王小虎",
-    address: "上海市普陀区金沙江路 1518 弄"
-  },
-  {
-    date: "2016-05-04",
-    name: "王小虎",
-    address: "上海市普陀区金沙江路 1518 弄"
-  },
-  {
-    date: "2016-05-01",
-    name: "王小虎",
-    address: "上海市普陀区金沙江路 1518 弄"
-  },
-  {
-    date: "2016-05-02",
-    name: "王小虎",
-    address: "上海市普陀区金沙江路 1518 弄"
-  },
-  {
-    date: "2016-05-03",
-    name: "王小虎",
-    address: "上海市普陀区金沙江路 1518 弄"
-  },
-  {
-    date: "2016-05-04",
-    name: "王小虎",
-    address: "上海市普陀区金沙江路 1518 弄"
-  },
-  {
-    date: "2016-05-01",
-    name: "王小虎",
-    address: "上海市普陀区金沙江路 1518 弄"
-  },
-  {
-    date: "2016-05-02",
-    name: "王小虎",
-    address: "上海市普陀区金沙江路 1518 弄"
-  },
-  {
-    date: "2016-05-03",
-    name: "王小虎",
-    address: "上海市普陀区金沙江路 1518 弄"
-  },
-  {
-    date: "2016-05-04",
-    name: "王小虎",
-    address: "上海市普陀区金沙江路 1518 弄"
-  }
-];
-export default {
-  data() {
-    return {
-      interval: "",
-      tableData: [
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        }
-      ],
-
-   
-      //还是注意这里如果这里是查询，不能写null表示空，而是直接使用‘’表示
-      list: [
-      ]
-    };
-  },
-  methods: {
-   change() {
-    if(tableData.length>0){
-      //change、paly表格数据动态滚动
-      this.tableData.unshift(tableData[0]);//把第一条数据插入数组最有一条
-      tableData.shift();//删除数组中第一条数据
-      }else{
-        console.log("没数据了")
-        window.clearInterval(this.interval)
-        this.interval=null
-    }
-  },
-    play() {
-      this.interval = setInterval(this.change, 2000); //每两秒执行一次插入删除操作
-      this.interval = setInterval(this.add, 2000); //每两秒执行一次插入删除操作
-    },
-
-    add() {
-      this.list.unshift({ id:id,name: "陈小帅", qq: 3199578835, happyNum: 10  });
-      id++;
-    },
-  },
-  created() {
-    this.play();
-  },
-  destroyed() {
-    window.clearInterval(this.interval);
-    this.interval = null;
-  }
-};
-</script>
-<style lang="less">
-.box {
-  width: 100%;
-  height: 100vh;
+     animation: hidden 2s ease-in;
+     opacity: 0;
+}
+.comprehensive {
+position: relative;
   background: #000;
-  color: #fff;
+  height: 90vh;
+  width: 100%;
+  padding-left: .8rem;
+  padding-right: .2rem;
+  overflow: hidden;
 }
 
-//transition-group
-.theard{
-  font-size: 1rem;
-  font-weight: bold;
-  span{
-    display: inline-block;
-    width:10rem;
+.top{
+  width:100%;
+  height:3rem;
+  .title{
+    font-size: 1rem;
+    color:#fff;
+    line-height:3rem;
+    font-weight: bold
+  }
+  .title_right{
+    color:#fff;
+    position: absolute;
+    font-size: 0.7rem;
+    right:1rem;
+    top:1rem;
+    p{
+      float: left;
+      padding-left:1rem;
+      padding-right:1rem;
+      &:nth-child(2){
+      padding-right:0.2rem;
+          border-left: 1px solid #333;
+      }
+    }
   }
 }
-.tbody{
-  width:40rem;
-  height: 10rem;
-  overflow: auto;
-  li {
-  line-height: 150%;
-  span{
-      display: inline-block;
-    width:10rem;
+.left > .el-row {
+  margin-bottom: 2rem;
+  
+}
+.left {
+   position: absolute;
+    width:20%;
+    height:100%;
+  overflow: hidden;
+  .el-row {
+    width: 10rem;
+    &:nth-child(1){
+       div{
+        background: #fff;
+        width:0.2rem;
+        height:0.8rem;
+        position: absolute;
+        top:0.4rem;
+        border-radius: 20%
+      }
+      color:#fff;
+      margin-bottom:1rem;
+      p{
+        margin-left:.5rem;
+        &:nth-child(1){
+          font-size: 0.7rem;
+          font-weight: bold;
+        }
+         &:nth-child(2){
+        color: #aaa;
+        }
+      };
+    }
+    .icon {
+      border-radius: 38%;
+      height: 2.2rem;
+      width: 2.2rem;
+      box-shadow: 1px 1px 10px 2px #999 inset;
+    }
+    .title {
+      .el-row:nth-child(1) {
+        font-size: 0.58rem;
+        color: #aaa;
+        margin-left: 1.6rem;
+          margin-bottom: 0rem !important;
+      }
+      .el-row:nth-child(2) {
+        margin-left: 0.7rem;
+        i {
+          color: #0095ff;
+          margin-right: 0.4rem;
+        }
+        span {
+          font-size: 0.5rem;
+          color: #fff;
+          font-weight: bold;
+        }
+      }
+    }
   }
 }
-}
-
-
-.v-enter,
-.v-lerve-to {
-  opacity: 0;
-  transform: translateY(-10px);
-}
-.v-enter-active,
-.v-lerve-active {
-  transition: all 1s ease;
-}
-/*添加进场效果*/
-
-.v-move {
-  transition: all 2s ease;
-}
-.v-leave-active {
-  position: absolute;
-}
-
-
-
-
-
-
-
-//el-table
-.el-table__row:nth-child(1){
-  animation: donghua 2s infinite ;
-}
-.el-table__body{
-  position: absolute;
-  animation: tableDonghua 1s infinite;
-}
-@keyframes donghua {
-  0%{
-    opacity: 0.51;
+.right{
+    position: absolute;
+    width:20%;
+    height:100%;
+    right:0rem;
+    top:3rem;
+ .risk{
+     position: relative;
+     top:1rem;
+     height:10rem;
+     .title_risk{
+       position: absolute;
+       top:-1rem;
+       left:1.2rem;
+       z-index:9;
+ div{
+        background: #fff;
+        width:0.2rem;
+        height:0.8rem;
+        position: absolute;
+        top:0.4rem;
+        border-radius: 20%
+      }
+      color:#fff;
+      margin-bottom:1rem;
+      p{
+        margin-left:.5rem;
+        &:nth-child(1){
+          font-size: 0.7rem;
+          font-weight: bold;
+        }
+      };
+     }
+      .detail{
+        position: absolute;
+        color:#fff;
+        top:9rem;
+       margin-left:0.5rem;
+        p{
+      float: left;
+      padding-left:1rem;
+      padding-right:0.3rem;
+      &:nth-child(2){
+      padding-left:0.5rem;
+      }
+    }
+       
+     }
+   }
+   .top5{
+     position: relative;
+     top:3rem;
+     height:10rem;
+     .title_top5{
+       position: absolute;
+       top:-1rem;
+       left:1.2rem;
+       z-index:9;
+ div{
+        background: #fff;
+        width:0.2rem;
+        height:0.8rem;
+        position: absolute;
+        top:0.4rem;
+        border-radius: 20%
+      }
+      color:#fff;
+      margin-bottom:1rem;
+      p{
+        margin-left:.5rem;
+        &:nth-child(1){
+          font-size: 0.7rem;
+          font-weight: bold;
+        }
+      };
+     
+     }
+   }
+    .hot{
+     position: relative;
+     top:4rem;
+     height:10rem;
+     .title_hot{
+       position: absolute;
+       top:-1rem;
+       left:1.2rem;
+       z-index:9;
+ div{
+        background: #fff;
+        width:0.2rem;
+        height:0.8rem;
+        position: absolute;
+        top:0.4rem;
+        border-radius: 20%
+      }
+      color:#fff;
+      margin-bottom:1rem;
+      p{
+        margin-left:.5rem;
+        &:nth-child(1){
+          font-size: 0.7rem;
+          font-weight: bold;
+        }
+      };
+     }
+     .content_hot{
+             position: absolute;
+       top:1.5rem;
+  .hot_item{
+    width:13rem;
+    height:1rem;
+   
+    margin-bottom:1rem;
+   .rank{
+       margin-left:1.2rem;
+       float: left;
+      height: 1rem;
+      width: 2.2rem;
+      box-shadow: 1px 1px 10px 2px #999 inset;  
+             color:#fff;
+             text-align: center;
+     }
+     .content{
+       float: left;       
+       color:#fff;
+       margin-left:0.5rem;
+     }
+     }
+     }
+   
+  
+   }
+    }
+@keyframes hidden {
+  0% {
+    opacity: 1;
   }
-  100%{
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
     opacity: 1;
   }
 }
-@keyframes tableDonghua {
-  0%{
-  top:-1.8rem
-  }
-  100%{
-  top:0rem
-  }}
 </style>
+<script>
+import {beatBar } from "../utils/charts/chartsBar"
+import {pie } from "../utils/charts/chartPie"
+export default {
+    data() {
+        return {
+            show:false,
+            hidden:false,
+            device:[
+                {name:'主机设备'},
+                {name:'网络安全设备'},
+                {name:'前端监控设备'},
+                {name:'网络打印设备'},
+                {name:'摄像机'},
+                {name:'其他'},
+            ],
+              hot:[
+                {name:'杭州市主机设备发现最大漏洞',num:"NO."},
+                {name:'杭州市主机设备发现最大漏洞',num:"NO."},
+                {name:'杭州市主机设备发现最大漏洞',num:"NO."},
+                {name:'杭州市主机设备发现最大漏洞',num:"NO."},
+                {name:'杭州市主机设备发现最大漏洞',num:"NO."}
+            ]
+        }
+    },
+    methods: {
+    beatBar,
+    pie
+  },
+    mounted(){
+      console.log(document.documentElement.clientWidth/80)
+      this.$nextTick(function() {
+      this.beatBar(this, "chartsBar");
+      this.pie(this, "chartsRisk");
+    })
+    //  setInterval(()=>{
+    //     this.show=!this.show,
+    //   this.hidden = !this.hidden
+    //  },3000)
+    }
+};
+</script>

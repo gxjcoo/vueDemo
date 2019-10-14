@@ -279,15 +279,25 @@ let colorArray = [
                label: {
             normal: {
                 show: true,
-                position: 'right',
-                distance: 10,
-               formatter: function(data) {
-                   return dataLine[data.dataIndex];
-               },
-                textStyle: {
-                    color: '#ffffff',
-                    fontSize: '12'
-                }
+                position: 'left',
+                distance: 100,
+                formatter : function(params) {
+                    var res = '';
+                            res += 
+                               //请注意写法:{xxx|}  'xxx'代表你自定义的name，'|'代表是自定义的一定要加上
+                            '{img1|}' 
+                    return res;
+                },
+                rich : {
+                             //这里设置您的图片引用名称
+                    img1 : {
+                               //引入图片
+                        backgroundColor : {
+                            image : require('../../assets/2.png')
+                        },
+                        height:20
+                    },
+                },
             }
         },
         z: 1
