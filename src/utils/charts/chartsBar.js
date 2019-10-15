@@ -282,15 +282,12 @@ let colorArray = [
                 position: 'left',
                 distance: 100,
                 formatter : function(params) {
-                    var res = '';
-                            res += 
                                //请注意写法:{xxx|}  'xxx'代表你自定义的name，'|'代表是自定义的一定要加上
-                            '{img1|}' 
-                    return res;
+                    return '{img|}' ;
                 },
                 rich : {
                              //这里设置您的图片引用名称
-                    img1 : {
+                    img : {
                                //引入图片
                         backgroundColor : {
                             image : require('../../assets/2.png')
