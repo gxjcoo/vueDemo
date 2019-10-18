@@ -326,6 +326,9 @@ let option = {
 
     series: series
 };
+//根据窗口的大小变动图表 --- 重点
+that.chart.resize();
 that.chart.setOption(option, true);
+
 }
 export{ echartsWorld }

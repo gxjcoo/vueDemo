@@ -1,31 +1,49 @@
 <template>
-  <div>
-    <button @click="getImgCodeApi()">1234123</button>
-    <img  v-if="result" :src="result" >
+  <div class="box">
+    
+        <div id="charts" style=" width:100%;height:100%;"></div>
   </div>
 </template>
+
+
+
+<style lang="less" scoped>
+.box{
+  width:100%;
+  height:100vh;
+  // background: #000;
+}
+</style>
+
 <script>
+import {echartsWorld } from "@/utils/charts/chartsWorld"
 export default {
+  
   data(){
-    return{
-      result:""
+    return {
+      a:1000,
+      
     }
   },
-  methods:{
-    async getImgCodeApi(){
-      console.log(this.result)
-       this.result = await this.$axios.get('/login/varifiCode', {
-          responseType: "arraybuffer"
-        }).then(function (response) {
-        //将从后台获取的图片流进行转换
-          return 'data:image/jpeg;base64,' + btoa(
-            new Uint8Array(response.data).reduce((data, byte) => data + String.fromCharCode(byte), '')
-          );
-        }).then(data=>data)
-      },
-  }
-}
-</script>
-<style lang="less" scoped>
+  methods: {
+    add(){
+      this.a++
+    },
+  echartsWorld
+  },
+  mounted() {
+    let self = this
+    setInterval(function(){
+      self.a = 1019
+    },500)
 
-</style>
+    this.$nextTick(function() {
+      this.echartsWorld(this,"charts");
+    });
+        //根据窗口的大小变动图表 --- 重点
+window.addEventListener("resize",function(){
+  self.echartsWorld(self,"charts");
+});
+  }
+};
+</script>
