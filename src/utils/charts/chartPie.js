@@ -112,28 +112,31 @@ const pie = (that, el) => {
 
 const pieSpace = (that, el) => {
     that.chart = echarts.init(document.getElementById(el))
-
     var scaleData = [{
-        'name': '工程建设',
-        'value': 10
+        'name': '摄像头',
+        'value': 5
     },
     {
-        'name': '产权交易',
-        'value': 20
+        'name': '终端',
+        'value': 15
     },
     {
-        'name': '土地交易',
-        'value': 20
+        'name': '未知资产',
+        'value': 12
     },
     {
-        'name': '其他交易',
-        'value': 27
+        'name': '非资产',
+        'value': 22
     },
     {
-        'name': '政府采购',
-        'value': 23
+        'name': '网络资产',
+        'value': 12
     }
 ];
+let numTotal = scaleData.reduce(function(num,item){
+num+=item.value
+return num
+},0)
 var rich = {
     white: {
         color: '#ddd',
@@ -181,7 +184,7 @@ for (var i = 0; i < scaleData.length; i++) {
         itemStyle: placeHolderStyle
     });
 }
-var seriesObj = [{
+var series = [{
     name: '',
     type: 'pie',
     clockWise: false,
@@ -216,18 +219,60 @@ var seriesObj = [{
     },
     data: data
 }];
+let title= {
+    text: numTotal,
+    subtext: '总数(分)',
+    x: 'center',
+    y: '43%',
+    textStyle: {
+        fontSize:50,
+        fontWeight:'normal',
+        color: ['#fff']
+    },
+    subtextStyle: {
+        color: '#fff',
+        fontSize: 26
+    },
+};
+
 let option = {
     backgroundColor: '#000',
     tooltip: {
         show: false
     },
-    legend: {
-        show: false
-    },
     toolbox: {
         show: false
     },
-    series: seriesObj
+    title,
+    series,
+    legend: {
+        show: true,
+        icon:"circle",
+        top: "center",
+        left: '70%',
+        data: scaleData,
+        width:50,
+        padding: [0, 5],
+        itemGap: 25,
+        formatter: function(name) {
+            return "{title|" + name + "}{value|" + (':'+123) +"}"
+        },
+       
+        textStyle: {
+            rich: {
+                title: {
+                    fontSize: 16,
+                    lineHeight: 15,
+                    color: "rgb(0, 178, 246)"
+                },
+                value: {
+                    fontSize: 18,
+                    lineHeight: 20,
+                    color: "#fff"
+                }
+            }
+        },
+    }
 }
     that.chart.setOption(option, true)
 }
