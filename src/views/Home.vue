@@ -16,33 +16,28 @@
 </style>
 
 <script>
-import {echartsWorld } from "@/utils/charts/chartsWorld"
+import {pieSpace } from "@/utils/charts/chartPie.js"
 export default {
   
   data(){
     return {
-      a:1000,
-      
     }
   },
   methods: {
-    add(){
-      this.a++
-    },
-  echartsWorld
+  pieSpace,
+  cahrtInit(){
+    let rem = document.documentElement.clientWidth/80;
+    console.log(rem)
+this.pieSpace(this,"charts",rem);
+  }
   },
   mounted() {
     let self = this
-    setInterval(function(){
-      self.a = 1019
-    },500)
-
     this.$nextTick(function() {
-      this.echartsWorld(this,"charts");
+      this.cahrtInit()
     });
-        //根据窗口的大小变动图表 --- 重点
 window.addEventListener("resize",function(){
-  self.echartsWorld(self,"charts");
+  self.cahrtInit()
 });
   }
 };

@@ -12,11 +12,10 @@
     }
     setBodyFontSize();
 
-    // set 1rem = viewWidth / 10
     function setRemUnit() {
+        //1920px下1rem=24px
         var rem = docEl.clientWidth / 80
         docEl.style.fontSize = rem + 'px'
-        console.log(rem)
     }
 
     setRemUnit()
