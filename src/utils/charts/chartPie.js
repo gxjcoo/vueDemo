@@ -137,6 +137,7 @@ let numTotal = scaleData.reduce(function(num,item){
 num+=item.value
 return num
 },0)
+let color=['#FF8700', '#ffc300', '#00e473', '#009DFF','#fff']
 var rich = {
     white: {
         color: '#ddd',
@@ -157,6 +158,30 @@ var placeHolderStyle = {
         borderWidth: 0
     }
 };
+let title= {
+    text: numTotal,
+    subtext: '总数(分)',
+    x: 'center',
+    y: '43%',
+    textStyle: {
+        fontSize:50,
+        fontWeight:'normal',
+        color: ['#fff']
+    },
+    subtextStyle: {
+        color: '#fff',
+        fontSize: 26
+    },
+};
+let scaleJson=array2obj(scaleData,'name')
+function array2obj(array,key) {
+	var resObj = {};
+	for(var i=0;i<array.length;i++){
+		resObj[array[i][key]] = array[i];
+	}
+	return resObj;
+}
+
 var data = [];
 for (var i = 0; i < scaleData.length; i++) {
     data.push({
@@ -166,13 +191,15 @@ for (var i = 0; i < scaleData.length; i++) {
             normal: {
                 borderWidth: 5,
                 shadowBlur: 30,
-                borderColor: new echarts.graphic.LinearGradient(0, 0, 1, 1, [{
-                    offset: 0,
-                    color: '#7777eb'
-                }, {
-                    offset: 1,
-                    color: '#70ffac'
-                }]),
+                borderColor:color[i],
+                //渐变色
+                // borderColor: new echarts.graphic.LinearGradient(0, 0, 1, 1, [{
+                //     offset: 0,
+                //     color: '#7777eb'
+                // }, {
+                //     offset: 1,
+                //     color: '#70ffac'
+                // }]),
                 shadowColor: 'rgba(142, 152, 241, 0.6)'
             }
         }
@@ -219,24 +246,13 @@ var series = [{
     },
     data: data
 }];
-let title= {
-    text: numTotal,
-    subtext: '总数(分)',
-    x: 'center',
-    y: '43%',
-    textStyle: {
-        fontSize:50,
-        fontWeight:'normal',
-        color: ['#fff']
-    },
-    subtextStyle: {
-        color: '#fff',
-        fontSize: 26
-    },
-};
+
+
 
 let option = {
     backgroundColor: '#000',
+    //legend的color，若pie无color设置，也会使用以下的color arr
+    color,
     tooltip: {
         show: false
     },
@@ -255,7 +271,8 @@ let option = {
         padding: [0, 5],
         itemGap: 25,
         formatter: function(name) {
-            return "{title|" + name + "}{value|" + (':'+123) +"}"
+            console.log(scaleJson)
+            return "{title|" + name + "}{value|" + (scaleJson[name].value) +"}"
         },
        
         textStyle: {
