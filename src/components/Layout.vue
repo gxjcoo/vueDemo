@@ -122,7 +122,7 @@
         <div style="text-align:center;clear:both">
         </div>
     </div>
-    <router-view></router-view>
+    <router-view class="content"></router-view>
   </div>
 </template>
 
@@ -140,5 +140,9 @@
   color:#fff;
   z-index: 999;
   height:100vh;
+}
+.content{
+    width:100%;
+    height:100vh;
 }
 </style>
