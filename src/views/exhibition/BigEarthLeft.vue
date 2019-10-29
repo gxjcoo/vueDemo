@@ -323,8 +323,8 @@ position: relative;
 }
 </style>
 <script>
-import {beatBar } from "../utils/charts/chartsBar"
-import {pie } from "../utils/charts/chartPie"
+import {beatBar } from "@/utils/charts/chartsBar"
+import {pie } from "@/utils/charts/chartPie"
 export default {
     data() {
         return {

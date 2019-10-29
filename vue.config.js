@@ -24,13 +24,16 @@ module.exports = {
 				alias: {
           'echarts/map/js/world.js': path.resolve('./src/utils/world.js'),
 					'@': path.resolve(__dirname, './src'),
-					'@c': path.resolve(__dirname, './src/components')
+					'@c': path.resolve(__dirname, './src/components'),
+					'vue': 'vue/dist/vue.esm.js'
+			
 				}
 			}
 		});
 	},
 	// 生产环境是否生成 sourceMap 文件
 	productionSourceMap: true,
+
 	// css相关配置
 	css: {
 		// 是否使用css分离插件 ExtractTextPlugin

@@ -3,7 +3,7 @@
       <el-row class="bigImgBox">
         <el-col :span="10" :offset="7">
           <el-card shadow="hover" class="bigImg">
-            <img src="../assets/bigScreen/1.jpg" />
+            <img src="@/assets/bigScreen/1.jpg" />
             <p>综合监控
               <span> 
                <i class="el-icon-s-tools" @click="dialogVisible = true"></i>            
@@ -15,7 +15,7 @@
       <el-row class="smallImgBox"  type="flex" :gutter="40">
             <el-col  style=" height:100%;">
               <el-card shadow="hover" class="smallImg">
-                <img src="../assets/bigScreen/2.jpg" />
+                <img src="@/assets/bigScreen/2.jpg" />
                 <p>漏洞监控
                    <span> 
                <i class="el-icon-s-tools" @click="dialogVisible = true"></i>
@@ -25,7 +25,7 @@
             </el-col>
             <el-col  style="height:100%;">
                <el-card shadow="hover" class="smallImg">
-                <img src="../assets/bigScreen/3.png" />
+                <img src="@/assets/bigScreen/3.png" />
                 <p>威胁监控
                    <span> 
                <i class="el-icon-s-tools" @click="dialogVisible = true"></i>
@@ -35,7 +35,7 @@
             </el-col>
                <el-col style="height:100%;"> 
                  <el-card shadow="hover" class="smallImg">
-                <img src="../assets/bigScreen/add.png" />
+                <img src="@/assets/bigScreen/add.png" />
                 <p>资产监控
                    <span> 
                <i class="el-icon-s-tools" @click="dialogVisible = true"></i>
