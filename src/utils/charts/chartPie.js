@@ -271,7 +271,6 @@ let option = {
         padding: [0, 5],
         itemGap: 25,
         formatter: function(name) {
-            console.log(scaleJson)
             return "{title|" + name + "}{value|" + (scaleJson[name].value) +"}"
         },
        

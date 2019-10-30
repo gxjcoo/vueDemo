@@ -103,6 +103,7 @@
 </style>
 
 <script>
+import echarts from "echarts"
 import { cahrtGraphForSearch } from "@/utils/charts/cahrtGraphForSearch";
 export default {
   data() {
@@ -115,6 +116,13 @@ export default {
     this.$nextTick(function() {
       this.cahrtGraphForSearch(this, "charts");
     });
+  },
+  updated(){
+    console.log(echarts)
+  },
+  destroyed(){
+    console.log(echarts)
+
   }
 };
 </script>

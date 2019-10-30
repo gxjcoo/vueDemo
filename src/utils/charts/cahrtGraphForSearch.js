@@ -1,7 +1,7 @@
 import echarts from 'echarts'
 const cahrtGraphForSearch = (that, el) => {
     that.chart = echarts.init(document.getElementById(el));
-  
+    echarts.dispose(that.chart)
         //加载图片
         let a = require("@/assets/1.png");
         let b = require("@/assets/2.png");
