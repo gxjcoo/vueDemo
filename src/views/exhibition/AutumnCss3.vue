@@ -2,7 +2,7 @@
 <div class="bg">
     <div class="box">
   <figure>
-    <figcaption>Autumn in HangZhou</figcaption>
+    <figcaption>Autumn</figcaption>
   </figure>
 </div>
  </div>
@@ -13,7 +13,6 @@ export default {
 }
 </script>
 <style lang="less">
-
 .bg { 
   width:100%;
   height:100%;
