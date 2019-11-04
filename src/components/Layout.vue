@@ -3,7 +3,10 @@
     <div class="menu">
      <Menu></Menu>
     </div>
-    <router-view class="content"></router-view>
+    <div class="cont">
+    <router-view></router-view>
+
+    </div>
   </div>
 </template>
 
@@ -24,8 +27,9 @@ import Menu from "./Menu.vue"
   z-index: 999;
   height:100vh;
 }
-.content{
+.cont{
     width:100%;
     height:100vh;
+    overflow: auto;
 }
 </style>
