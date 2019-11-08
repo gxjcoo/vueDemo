@@ -16,3 +16,39 @@ border-radius:6px
 border-radius:6px
 
 }
+
+
+
+.el-loading-spinner .circular{
+    width: 42px;
+    height: 42px;
+    animation: loading-rotate 2s linear infinite;
+    display: none;
+  }
+  .el-loading-spinner{
+      width: 230px;
+      height: 230px;
+     
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-position: center;
+      animation: raise 0.3s ease-in-out infinite;
+      top: 20%;
+      left: 50%;
+      position: relative;
+  }
+  @keyframes raise{
+      0%{
+          background: url(./img/bg.png)
+      }
+      100%{
+        background: url(./img/autumn3.jpeg)
+      }
+    
+  } 
+
+
+
+
+
