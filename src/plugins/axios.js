@@ -63,6 +63,13 @@ http.interceptors.request.use(config => {
 if(config.headers.showLoading !== false){
   showLoading(config.headers.loadingTarget);
 }
+//全局添加时间戳筛选
+if(config.method=='get'){
+  //判断是否有params字段
+  if(config.params==undefined) config.params={}
+  config.params['startTime'] = config.params.hasOwnProperty('startTime')&&()
+
+}
 return config;
 }, err => {
 //判断当前请求是否设置了不显示Loading

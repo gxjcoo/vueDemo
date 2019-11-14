@@ -1,6 +1,4 @@
-
-
-< template >
+<template>
   <div class="box">
     <div class="title">
       <ul>
@@ -601,8 +599,7 @@ export default {
         font-family: MicrosoftYaHei-Bold;
         font-weight: bold;
         color: rgba(51, 50, 50, 1);
-        &:nth-child(1) {
-        }
+     
         &:nth-child(2) {
           margin-left: 18rem;
         }
