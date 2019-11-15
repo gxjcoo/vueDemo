@@ -707,7 +707,7 @@ export default {
             height: 2rem;
             z-index: 9999;
             width: 2rem;
-            background: url("../../assets/img/dialogBlock/updown.png") no-repeat
+            background: url("../../assets/updown.png") no-repeat
               center center;
             cursor: pointer;
           }
@@ -718,7 +718,7 @@ export default {
             height: 2rem;
             width: 2rem;
             transform: rotate(180deg);
-            background: url("../../assets/img/dialogBlock/updown.png") no-repeat
+            background: url("../../assets/updown.png") no-repeat
               center center;
             cursor: pointer;
           }

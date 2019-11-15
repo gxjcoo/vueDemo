@@ -23,7 +23,9 @@ export default {
     created(){
   },
   mounted(){
- 
+    this.$axios.get('/api/sdf/adg').then(res=>{
+      console.log(res)
+    })
   }
 };
 </script>

@@ -4,9 +4,10 @@ import Layout from './components/Layout.vue'
 import LoadImg from './components/loadImg.vue'
 import Home from './views/home/Home.vue'
 import echarts from './router/echarts'
+import store from './store';
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
    mode: 'history',
   routes: [
     {
@@ -36,3 +37,12 @@ export default new Router({
   }
   ]
 })
+
+
+//路由守卫
+router.beforeEach((to,from,next)=>{
+  console.log(store.state.timeFilter)
+   store.commit('timeFilter/initData')
+  next()
+})
+export default router

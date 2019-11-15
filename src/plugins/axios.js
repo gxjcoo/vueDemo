@@ -68,10 +68,10 @@ if(config.method=='get'){
   //判断是否有params字段
   if(config.params==undefined) config.params={}
   config.params['startTime'] = config.params.hasOwnProperty('startTime')&&(config.params['startTime']!=null)?config.params['startTime']:store.state.timeFilter.startTime
-  config.params['endTime'] = config.params.hasOwnProperty('startTime')&&(config.params['startTime']!=null)?config.params['startTime']:store.state.timeFilter.startTime
+  config.params['endTime'] = config.params.hasOwnProperty('endTime')&&(config.params['startTime']!=null)?config.params['endTime']:store.state.timeFilter.endTime
 }else{
   config.params['startTime'] = config.params.hasOwnProperty('startTime')&&(config.params['startTime']!=null)?config.params['startTime']:store.state.timeFilter.startTime
-  config.params['endTime'] = config.params.hasOwnProperty('startTime')&&(config.params['startTime']!=null)?config.params['startTime']:store.state.timeFilter.startTime
+  config.params['endTime'] = config.params.hasOwnProperty('endTime')&&(config.params['startTime']!=null)?config.params['endTime']:store.state.timeFilter.endTime
 }
 return config;
 }, err => {
