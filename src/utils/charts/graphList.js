@@ -35,7 +35,7 @@ var noDataOption = {
     ],
     series: []
 }
-const graph = (that, el, lineData, color) => {
+const graph = (that, el, lineData, color="red") => {
     that.chart = echarts.init(document.getElementById(el));
     //节点坐标
     //y间隔115
@@ -139,7 +139,7 @@ const graph = (that, el, lineData, color) => {
             lineStyle: {
                 normal: {
                     width: 2,
-                    color,
+                    color:"red",
                     opacity: 1
                 }
             },

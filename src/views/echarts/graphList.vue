@@ -168,7 +168,6 @@ export default {
       t2: [],
       //当前选中组
       p: [],
-
       //模拟假数据
       graphData: [
         {
@@ -352,7 +351,6 @@ export default {
           ]
         }
       ],
-      color:"#000",
       tag:[{title:"第一列",icon:require("@/assets/1.png")},{title:"第二列",icon:require("@/assets/2.png")},{title:"第三列",icon:require("@/assets/3.png")}]
     };
   },
@@ -439,8 +437,8 @@ export default {
       );
       this.line = [l1, l2];
       setTimeout(() => {
-        this.graph(this, "echarts_graph3", this.line[0], this.color);
-        this.graph(this, "echarts_graph4", this.line[1], this.color);
+        this.graph(this, "echarts_graph3", this.line[0]);
+        this.graph(this, "echarts_graph4", this.line[1]);
       }, 0);
     },
     //目的IP展开后的攻击手段事件
@@ -472,8 +470,8 @@ export default {
       );
       this.line = [l1, l2];
       setTimeout(() => {
-        this.graph(this, "echarts_graph3", this.line[0], this.color);
-        this.graph(this, "echarts_graph4", this.line[1], this.color);
+        this.graph(this, "echarts_graph3", this.line[0]);
+        this.graph(this, "echarts_graph4", this.line[1]);
       }, 0);
     },
     close(n) {
@@ -503,8 +501,8 @@ export default {
       let l2 = this.p.attactTarget.map(item => [0, j++]);
       this.line = [l1, l2];
          setTimeout(() => {
-        this.graph(this, "echarts_graph3", this.line[0], this.color);
-        this.graph(this, "echarts_graph4", this.line[1], this.color);
+        this.graph(this, "echarts_graph3", this.line[0]);
+        this.graph(this, "echarts_graph4", this.line[1]);
       }, 0);
          this.show1 = false
      }else{
@@ -527,8 +525,8 @@ export default {
       let l2 = this.p.attactType.map(item => [n++,5]);
       this.line = [l1, l2];
          setTimeout(() => {
-        this.graph(this, "echarts_graph3", this.line[0], this.color);
-        this.graph(this, "echarts_graph4", this.line[1], this.color);
+        this.graph(this, "echarts_graph3", this.line[0]);
+        this.graph(this, "echarts_graph4", this.line[1]);
       }, 0);
         this.show2 = false
      }
@@ -561,21 +559,21 @@ export default {
          this.attackNums.push(item.attactType.length),
        this.targetNums.push(item.attactTarget.length)
        });
-      this.graph(this, "echarts_graph1", this.lineData, this.color);
-      this.graph(this, "echarts_graph2", this.lineData, this.color);
+      this.graph(this, "echarts_graph1", this.lineData);
+      this.graph(this, "echarts_graph2", this.lineData);
     }, 1000);
   },
   watch: {
     show(val) {
       if (val) {
         setTimeout(() => {
-          this.graph(this, "echarts_graph1", this.lineData, this.color);
-          this.graph(this, "echarts_graph2", this.lineData, this.color);
+          this.graph(this, "echarts_graph1", this.lineData);
+          this.graph(this, "echarts_graph2", this.lineData);
         }, 0);
       } else {
         setTimeout(() => {
-          this.graph(this, "echarts_graph3", this.line[0], this.color);
-          this.graph(this, "echarts_graph4", this.line[1], this.color);
+          this.graph(this, "echarts_graph3", this.line[0]);
+          this.graph(this, "echarts_graph4", this.line[1]);
         }, 0);
       }
     }

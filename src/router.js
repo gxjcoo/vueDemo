@@ -8,7 +8,7 @@ import store from './store';
 Vue.use(Router)
 
 const router = new Router({
-   mode: 'history',
+   //mode: 'history',
   routes: [
     {
       path: '/loading',
@@ -41,7 +41,7 @@ const router = new Router({
 
 //路由守卫
 router.beforeEach((to,from,next)=>{
-  console.log(store.state.timeFilter)
+  //页面跳转刷新筛选时间
    store.commit('timeFilter/initData')
   next()
 })
