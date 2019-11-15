@@ -1,9 +1,9 @@
 "use strict";
-
 import Vue from 'vue';
+import store from '../store'
+import axios from "axios";
 import { Message,Loading } from 'element-ui';
 import _ from 'lodash';
-import axios from "axios";
 
 // Full config:  https://github.com/axios/axios#request-config
 // axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || '';
@@ -67,8 +67,11 @@ if(config.headers.showLoading !== false){
 if(config.method=='get'){
   //判断是否有params字段
   if(config.params==undefined) config.params={}
-  config.params['startTime'] = config.params.hasOwnProperty('startTime')&&()
-
+  config.params['startTime'] = config.params.hasOwnProperty('startTime')&&(config.params['startTime']!=null)?config.params['startTime']:store.state.timeFilter.startTime
+  config.params['endTime'] = config.params.hasOwnProperty('startTime')&&(config.params['startTime']!=null)?config.params['startTime']:store.state.timeFilter.startTime
+}else{
+  config.params['startTime'] = config.params.hasOwnProperty('startTime')&&(config.params['startTime']!=null)?config.params['startTime']:store.state.timeFilter.startTime
+  config.params['endTime'] = config.params.hasOwnProperty('startTime')&&(config.params['startTime']!=null)?config.params['startTime']:store.state.timeFilter.startTime
 }
 return config;
 }, err => {
