@@ -1,5 +1,13 @@
 const path = require('path');
 module.exports = {
+	//配置多页面
+   pages:{
+	index:{
+		entry:'src/main.js',
+		template:'public/index.html'
+	},
+	page:'src/multiPage/page2.js',
+},
 	// 基本路径
 	baseUrl: './',
 	// 输出文件目录
@@ -22,7 +30,7 @@ module.exports = {
 			// 开发生产共同配置
 			resolve: {
 				alias: {
-          'echarts/map/js/world.js': path.resolve('./src/utils/world.js'),
+                    'echarts/map/js/world.js': path.resolve('./src/utils/world.js'),
 					'@': path.resolve(__dirname, './src'),
 					'@c': path.resolve(__dirname, './src/components'),
 					'vue': 'vue/dist/vue.esm.js'
@@ -62,7 +70,7 @@ module.exports = {
       '/api': {
         target: 'http://localhost:3030',
         changeOrigin: true,
-        // 路径重写： 下面的意思是重写访问路径中的  '/api' 为 '' ，如果没有重写, /api 代表 http://127.0.0.1:8090/api
+        // 路径重写： 下面的意思是重写访问路径中的  '/api' 为 '' ，如果没有重写, /api 代表 http://127.0.0.1:8080/api
         pathRewrite: {
           '^/api': ''
         }
