@@ -9,6 +9,7 @@ Vue.use(Router)
 
 const router = new Router({
    mode: 'history',
+   base:'/demo',
   routes: [
     {
       path: '/loading',
@@ -29,12 +30,12 @@ const router = new Router({
        ...echarts,
     ]
     },
-  //   {
-  //     path: '*',
-  //     redirect: {
-  //         name: 'Home'
-  //     }
-  // }
+    {
+      path: '*',
+      redirect: {
+          name: 'Home'
+      }
+  }
   ]
 })
 
