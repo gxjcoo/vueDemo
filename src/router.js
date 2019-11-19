@@ -29,12 +29,12 @@ const router = new Router({
        ...echarts,
     ]
     },
-    {
-      path: '*',
-      redirect: {
-          name: 'Home'
-      }
-  }
+  //   {
+  //     path: '*',
+  //     redirect: {
+  //         name: 'Home'
+  //     }
+  // }
   ]
 })
 
