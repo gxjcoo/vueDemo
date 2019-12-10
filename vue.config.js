@@ -30,7 +30,8 @@ module.exports = {
 			// 开发生产共同配置
 			resolve: {
 				alias: {
-                    'echarts/map/js/world.js': path.resolve('./src/utils/world.js'),
+					'echarts/map/js/world.js': path.resolve('./src/utils/world.js'),
+					'@p': path.resolve('./public'),
 					'@': path.resolve(__dirname, './src'),
 					'@c': path.resolve(__dirname, './src/components'),
 					'vue': 'vue/dist/vue.esm.js'
