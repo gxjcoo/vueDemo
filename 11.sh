@@ -1,3 +1,4 @@
+cd /home/g60003/myDome
 msg=$1
 if [ -n "$msg" ]; then
    git add .
