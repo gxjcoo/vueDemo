@@ -4,12 +4,12 @@ if [ -n "$msg" ]; then
    git add -A
    git commit -m"${msg}"
    git pull
-  git push
- expect "Username for 'https://github.com':"
-send "gjxcoo"
+   git push
+expect "Username for 'https://github.com': "
+send "gjxcoo\r"
 expect "Password for 'https://gxjcoo@github.com':"
 send "zjk123\r"
-   
+   interact 
 else
     echo "请添加注释再来一遍"
 fi
