@@ -46,6 +46,9 @@ export default{
                      this.num.splice(3,1)
                      console.log(this.num)
                 }
+            },
+            mounted(){
+                console.log("11")
             }
 }
   

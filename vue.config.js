@@ -1,4 +1,6 @@
+const  Version = new Date().getTime(); 
 const path = require('path');
+const moment =  require('moment') 
 module.exports = {
 	//配置多页面
    pages:{
@@ -11,7 +13,7 @@ module.exports = {
 	// 基本路径
 	baseUrl: './',
 	// 输出文件目录
-	outputDir: 'html',
+	outputDir: 'html'+moment(Version).format("YYYY-MM-DD HH:mm:ss") ,
 	// eslint-loader 是否在保存的时候检查
 	lintOnSave: true,
 	// webpack配置
@@ -69,7 +71,7 @@ module.exports = {
 		hotOnly: false,
       proxy: {
       '/api': {
-        target: 'http://localhost:3030',
+        target: 'http://10.121.200.201:8080',
         changeOrigin: true,
         // 路径重写： 下面的意思是重写访问路径中的  '/api' 为 '' ，如果没有重写, /api 代表 http://127.0.0.1:8080/api
         pathRewrite: {
