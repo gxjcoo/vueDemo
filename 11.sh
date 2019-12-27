@@ -5,7 +5,7 @@ if [ -n "$msg" ]; then
    git commit -m"${msg}"
    git pull
    git push
-expect "Username for 'https://github.com': "
+expect "Username"
 send "gjxcoo\r"
 expect "Password for 'https://gxjcoo@github.com':"
 send "zjk123\r"
