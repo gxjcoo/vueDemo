@@ -71,7 +71,7 @@ module.exports = {
       '/api': {
         target: 'http://localhost:3030',
         changeOrigin: true,
-        // 路径重写： 下面的意思是重写访问路径中的  '/api' 为 '' ，如果没有重写, /api 代表 http://127.0.0.1:8080/api
+        // 路径重写： 下面的意思是重写访问路径中的  '/api' 为 '' ，如果没有重写, /api 代表 http://127.0.0.1:3030/api
         pathRewrite: {
           '^/api': ''
         }

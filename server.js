@@ -14,8 +14,6 @@ const proxyTable = {
 app.use(function(req, res,next) {  
     const url = req.url;  
     if (req.method == 'OPTIONS') {      
-      console.log('options_url: ', url); 
-      
        //  设置cors 跨域
       // res.header("Access-Control-Allow-Origin", req.headers.origin || '*');
       // res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With");
