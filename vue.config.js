@@ -62,11 +62,12 @@ module.exports = {
 	pwa: {},
 	// webpack-dev-server 相关配置
 	devServer: {
-		open: process.platform === 'darwin',
+		open: true,
 		host: '0.0.0.0',
 		port: 8080,
 		https: false,
-		hotOnly: false,
+		hot: true,
+		hotOnly: true,
       proxy: {
       '/api': {
         target: 'http://localhost:3030',

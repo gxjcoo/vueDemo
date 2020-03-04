@@ -111,23 +111,6 @@ http.interceptors.response.use(
 
 
 
-Plugin.install = function(Vue, options) {
-  Vue.axios = http;
-  window.axios = http;
-  Object.defineProperties(Vue.prototype, {
-    axios: {
-      get() {
-        return http;
-      }
-    },
-    $axios: {
-      get() {
-        return http;
-      }
-    },
-  });
-};
 
-Vue.use(Plugin)
 
-export default Plugin;
+Vue.use(http) ;
