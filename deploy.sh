@@ -8,7 +8,7 @@ set -e
 git pull 
 
 git add .
-git commit -m "'$0'"
+git commit -m "$*"
 
 git push -u origin master
 
